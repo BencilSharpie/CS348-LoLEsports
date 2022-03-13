@@ -6,3 +6,6 @@ https://docs.djangoproject.com/en/4.0/intro/install/
 
 Database:
 https://docs.djangoproject.com/en/4.0/topics/install/#database-installation
+
+Virtual Environment
+https://www.digitalocean.com/community/tutorials/how-to-install-the-django-web-framework-on-ubuntu-20-04
