@@ -1,0 +1,10 @@
+Cloud9::1
+TSM::2
+Team Liquid::3
+100 Thieves::4
+Dignitas::5
+Evil Geniuses::6
+Immortals::7
+FlyQuest::8
+Counter Logic Gaming::9
+Golden Guardians::10
