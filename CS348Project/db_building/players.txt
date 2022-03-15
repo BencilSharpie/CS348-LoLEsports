@@ -1,0 +1,54 @@
+Ssumday::Kim Chan-ho::South Korea::Top::2.3::7.9::35125.00::100 Thieves
+Closer::Can Celik::Turkey::Jungle::3.9::6.2::35125.00::100 Thieves
+Damonte::Tanner Damonte::United States::Mid::3.3::8.1::35125.00::100 Thieves
+ry0ma::Tommy Le::Australia::Mid::5.3::8.6::35125.00::100 Thieves
+FBI::Victor Huang::Australia::ADC::4.7::7.7::35125.00::100 Thieves
+huhi::Choi Jae-hyun::South Korea::Support::3.2::2.4::35125.00::100 Thieves
+Fudge::Ibrahim Allami::Australia::Top::6.0::7.8::49525.00::Cloud9
+Blaber::Robert Huang::United States::Jungle::5.1::7.2::49525.00::Cloud9
+Perkz::Luka Perkovic::Croatia::Mid::4.5::9.3::49525.00::Cloud9
+Zven::Jesper Svenningsen::Denmark::ADC::5.3::9.3::49525.00::Cloud9
+Vulcan::Philippe Laflamme::Canada::Support::3.3::1.0::49525.00::Cloud9
+Finn::Finn Wiestal::Sweden::Top::2.8::7.6::30000.00::Counter Logic Gaming
+Griffin::Raymond Griffin::United States::Jungle::2.7::6.0::30000.00::Counter Logic Gaming
+Broxah::Mads Brock-Pedersen::Denmark::Jungle::3.7::5.9::30000.00::Counter Logic Gaming
+rjs::Alexy Zatorski::Canada::Mid::2.7::8.2::30000.00::Counter Logic Gaming
+Pobelter::Eugene Park::United States::Mid::2.2::8.6::30000.00::Counter Logic Gaming
+WildTurtle::Jason Tran::Canada::ADC::2.5::9.9::30000.00::Counter Logic Gaming
+Smoothie::Andy Ta::Canada::Support::2.8::1::30000.00::Counter Logic Gaming
+FakeGod::Aaron Lee::United States::Top::3.4::7.4::31000.00::Dignitas
+Dardoch::Joshua Hartnett::United States::Jungle::3.3::6.3::31000.00::Dignitas
+Soligo::Max Soong::United States::Mid::4.4::8.5::31000.00::Dignitas
+Neo::Toàn Tran::Vietnam::ADC::5.6::8.7::31000.00::Dignitas
+aphromoo::Zaqueri Black::United States::Support::4.1::1.3::31000.00::Dignitas
+Impact::Jeong Eon-young::South Korea::Top::3.0::7.1::33500.00::Evil Geniuses
+Svenskeren::Dennis Johnsen::Denmark::Jungle::2.7::6.1::33500.00::Evil Geniuses
+Jiizuke::Daniele di Mauro::Italy::Mid::3.5::9.1::33500.00::Evil Geniuses
+Deftly::Matthew Chen::United States::ADC::5.7::8.9::33500.00::Evil Geniuses
+IgNar::Lee Dong-geun::South Korea::Support::3.2::1.3::33500.00::Evil Geniuses
+Licorice::Eric Ritchie::Canada::Top::2.3::7.7::27500.00::FlyQuest
+Josedeodo::Brandon Joel Villegas::Argentina::Jungle::3.2::6.7::27500.00::FlyQuest
+Palafox::Cristian Palafox::United States::Mid::2.7::8.7::27500.00::FlyQuest
+Johnsun::Johnson Nguyen::Canada::ADC::3.9::8.1::27500.00::FlyQuest
+Diamond::David Berube::Canada::Support::2.0::2.1::27500.00::FlyQuest
+Dreams::Han Min-kook::South Korea::Support::2.8::0.7::27500.00::FlyQuest
+Niles::Aiden Tidwell::United States::Top::1.1::6.9::25000.00::Golden Guardians
+Iconic::Ethan Wilkinson::United States::Jungle::1.9::6.8::25000.00::Golden Guardians
+Ablazeolive::Nicholas Antonio Abbott::Canada::Mid::2.2::8.5::25000.00::Golden Guardians
+Stixxay::Trevor Hayes::United States::ADC::1.9::9.1::25000.00::Golden Guardians
+Newbie::Leandro Marcos::Argentina::Support::2.0::1.3::25000.00::Golden Guardians
+Revenge::Mohamed Kaddoura::United States::Top::2.5::7.7::26000.00::Immortals
+Xerxe::Andrei Dragomir::Romania::Jungle::4.2::6.3::26000.00::Immortals
+Insanity::David Challe::United States::Mid::4.2::9.2::26000.00::Immortals
+Raes::Quin Korebrits::New Zealand::ADC::3.0::8.1::26000.00::Immortals
+Destiny::Mitchell Shaw::Australia::Support::3.3::1.8::26000.00::Immortals
+Alphari::Barney Morris::United Kingdom::Top::3.0::8.7::52235.41::Team Liquid
+Santorin::Lucas Larsen::Denmark::Jungle::5.5::6.5::52235.41::Team Liquid
+Jensen::Nicolaj Jensen::Denmark::Mid::6.0::9.0::52235.41::Team Liquid
+Tactical::Edward Ra::United States::ADC::3.7::9.0::52235.41::Team Liquid
+CoreJJ::Jo Yong-in::South Korea::Support::4.8::1.4::52235.41::Team Liquid
+Huni::Heo Seung-hoon::South Korea::Top::4.2::7.9::29000.00::TSM
+Spica::Mingyi Lu::China::Jungle::4.3::6.1::29000.00::TSM
+PowerOfEvil::Tristan Schrage::Germany::Mid::3.6::9.6::29000.00::TSM
+Lost::Lawrence Hui::New Zealand::ADC::4.4::9::29000.00::TSM
+SwordArt::Hu Shuo-Chieh::Taiwan::Support::3.7::1.2::29000.00::TSM
