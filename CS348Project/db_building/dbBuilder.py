@@ -87,6 +87,8 @@ c.execute("DROP TRIGGER IF EXISTS champ_recalc_win_trigger;")
 connection.commit()
 c.execute("DROP TRIGGER IF EXISTS player_recalc_mvp_trigger;")
 connection.commit()
+c.execute("DROP TRIGGER IF EXISTS team_recalc_winloss_trigger;")
+connection.commit()
 c.execute("CREATE TRIGGER champ_add_trigger BEFORE INSERT ON pick_ban BEGIN "
           "INSERT INTO champion SELECT NEW.champion1, 0, 0, 0 "
           "WHERE NOT EXISTS (SELECT 1 FROM champion WHERE name = NEW.champion1);"
