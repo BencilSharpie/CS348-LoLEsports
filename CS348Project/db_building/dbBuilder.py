@@ -49,7 +49,8 @@ c.execute("CREATE TABLE match ("
           "team1_gold INTEGER,"
           "team2_gold INTEGER,"
           "match_length TIME,"
-          "mvp NVARCHAR(1024)"
+          "mvp NVARCHAR(1024), "
+          "patch NVARCHAR(1024)"
           ");")
 connection.commit()
 
@@ -203,12 +204,12 @@ with open ("matches.txt") as file:
     for line in file:
         line = line.rstrip()
         args = line.split("::")
-        if len(args) != 30:
+        if len(args) != 31:
             print(f"invalid number of args for match, ignoring entry {line}\n")
             continue
         c.execute("INSERT INTO match "
                   f"VALUES ({match_id}, '{args[0]}', '{args[1]}', '{args[2]}', '{args[3]}', "
-                  f"{args[4]}, {args[5]}, {args[6]}, {args[7]}, '{args[8]}', '{args[9]}');")
+                  f"{args[4]}, {args[5]}, {args[6]}, {args[7]}, '{args[8]}', '{args[9]}', '{args[30]}');")
         connection.commit()
         c.execute("INSERT INTO pick_ban "
                   f"VALUES ({match_id}, '{args[1]}', 'ban', '{args[10]}', '{args[11]}', "
