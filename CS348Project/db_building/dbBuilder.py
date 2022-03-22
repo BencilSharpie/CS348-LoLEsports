@@ -231,9 +231,12 @@ with open ("matches.txt") as file:
 
 # properly calculate pr, br, and wr of champs (should be done in sp in the future)
 c.execute("UPDATE champion "
-          "SET win_rate = ((win_rate / pick_rate) * 100), "
-          "pick_rate = ((pick_rate / (SELECT COUNT(*) FROM match)) * 100), "
+          "SET win_rate = ((win_rate / pick_rate) * 100) "
+          "WHERE pick_rate <> 0;")
+c.execute("UPDATE champion "
+          "SET pick_rate = ((pick_rate / (SELECT COUNT(*) FROM match)) * 100), "
           "ban_rate = ((ban_rate / (SELECT COUNT(*) FROM match)) * 100);")
+
 connection.commit()
 
 # drop hanging triggers (leave the one that makes new champs, it's useful)
