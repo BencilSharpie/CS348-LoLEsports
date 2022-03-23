@@ -6,4 +6,5 @@ urlpatterns = [
     path('team', views.team),
     path('player', views.player),
     path('match', views.match),
+    path('champion', views.champion),
 ]
