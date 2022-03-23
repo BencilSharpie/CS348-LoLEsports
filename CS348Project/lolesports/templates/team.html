@@ -2,10 +2,35 @@
 <html>
 <head>
 <style>
+
+
+#roster {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 30%;
+  float: left;
+  margin-left: 150px;
+}
+#roster td, #roster th {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+#roster th {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
 #customers {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 110%;
+  width: 80%;
+
+  margin-left: auto;
+  margin-right: auto;
 
 }
 h1 {text-align: center;}
@@ -26,7 +51,100 @@ h2 {text-align: center;}
 </style>
 </head>
 <body>
-<h1>Team Page</h1>
+<h1>Team Name</h1>
+<h2>Last 5 Matches</h2>
+<table id="customers">
+  
+  <tr>
+      <td><b>Date</b></td>
+      <td><b>Opponent</b></td>
+      <td><b>Winner</b></td>
+      <td><b>MVP</b></td>
+      <td><b>Score</b></td>
+      <td><b>Match Length</b></td>
+  </tr>
+  <tr>
+      <td>Date 1</td>
+      <td>Opponent 1</td>
+      <td>Winner 1</td>
+      <td>MVP 1</td>
+      <td>Winner Kills - Loser Kills</td>
+      <td>Match Length 1</td>
+  <tr>
+    <td>Date 2</td>
+    <td>Opponent 2</td>
+    <td>Winner 2</td>
+    <td>MVP 2</td>
+    <td>Winner Kills - Loser Kills</td>
+    <td>Match Length 2</td>
+  </tr>
+  <tr>
+    <td>Date 3</td>
+    <td>Opponent 3</td>
+    <td>Winner 3</td>
+    <td>MVP 4</td>
+    <td>Winner Kills - Loser Kills</td>
+    <td>Match Length 4</td>
+  </tr>
+  <tr>
+    <td>Date 4</td>
+    <td>Opponent 4</td>
+    <td>Winner 4</td>
+    <td>MVP 4</td>
+    <td>Winner Kills - Loser Kills</td>
+    <td>Match Length 4</td>
+  </tr>
+  <tr>
+    <td>Date 5</td>
+    <td>Opponent 5</td>
+    <td>Winner 5</td>
+    <td>MVP 5</td>
+    <td>Winner Kills - Loser Kills</td>
+    <td>Match Length 5</td>
+  </tr>
+</table>
 
+<br><br>
+
+<span>
+  <table id ="roster">
+    <tr>
+      <td><b>Roster</b></td>
+    </tr>
+    <tr>
+      <td>Player 1</td>
+    </tr>
+    <tr>
+      <td>Player 2</td>
+    </tr>
+    <tr>
+      <td>Player 3</td>
+    </tr>
+    <tr>
+      <td>Player 4</td>
+    </tr>
+    <tr>
+      <td>Player 5</td>
+    </tr>
+  
+  </table>
+</span>
+
+&nbsp;
+<table id="roster">
+  <caption>Team Summary</caption>
+  <tr>
+    <td>Wins</td>
+    <td>number</td>
+  </tr>
+  <tr>
+    <td>Losses</td>
+    <td>number</td>
+  </tr>
+  <tr>
+    <td>Ranking</td>
+    <td>Rank</td>
+  </tr>
+</table>
 </body>
 </html>
