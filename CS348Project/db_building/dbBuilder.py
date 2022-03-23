@@ -1,7 +1,7 @@
 import sqlite3
 
 # assumes there is no valuable data in pre-existing tables
-connection = sqlite3.connect("lcs2021.db")
+connection = sqlite3.connect("lcs2021.sqlite3")
 c = connection.cursor()
 
 # remove existing tables
@@ -245,5 +245,14 @@ connection.commit()
 c.execute("DROP TRIGGER IF EXISTS champ_recalc_ban_trigger;")
 connection.commit()
 c.execute("DROP TRIGGER IF EXISTS champ_recalc_win_trigger;")
+
+# create view
+c.execute("DROP VIEW IF EXISTS top5Matches;")
+c.execute("CREATE VIEW top5Matches AS "
+        "SELECT match_date, team1_name, team2_name, outcome, team1_kills, team2_kills, mvp "
+        "FROM `match` "
+        "WHERE outcome IS NOT NULL "
+        "ORDER BY match_date DESC "
+        "LIMIT 5;")
 connection.commit()
 c.close()
