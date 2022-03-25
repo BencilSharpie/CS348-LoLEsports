@@ -51,6 +51,8 @@ h2 {text-align: center;}
 }
 </style>
 </head>
+{% extends "./menubar.html" %}
+{% block content %}
 <body>
   {% for teamData in teamInfo %}
     <tr>
@@ -131,4 +133,5 @@ h2 {text-align: center;}
 </table>
 {% endfor %}
 </body>
+{% endblock %}
 </html>

@@ -23,8 +23,12 @@ h1 {text-align: center;}
   color: white;
 }
 </style>
+
 </head>
+
 <body>
+  {% extends "./menubar.html" %}
+{% block content %}
 <h1>Champions</h1>
 <table id="champs">
     <tr>
@@ -43,4 +47,5 @@ h1 {text-align: center;}
     {% endfor %}
 </table>
 </body>
+{% endblock %}
 </html>

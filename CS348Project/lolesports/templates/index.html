@@ -25,6 +25,8 @@ h2 {text-align: center;}
 }
 </style>
 </head>
+{% extends "./menubar.html" %}
+{% block content %}
 <body>
 <h1>Homepage</h1>
 <table id="customers">
@@ -53,12 +55,8 @@ h2 {text-align: center;}
     {% endif %}
     {% endfor %}
 
-    <a href="/schedule"> Schedule</a> </p></p>
-    <a href="/champion">Champions</a> </p></p>
-    <a href="/match"> Matches </a> </p></p>
-    <a href="/team"> Teams</a> </p></p>
-    <a href="/player"> Players</a> </p></p>
     <h2>Last 5 Matches</h2>
 </table>
 </body>
+{% endblock %}
 </html>
