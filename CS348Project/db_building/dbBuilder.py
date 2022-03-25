@@ -1,6 +1,7 @@
 import sqlite3
 
 # assumes there is no valuable data in pre-existing tables
+
 connection = sqlite3.connect("lcs2021.sqlite3")
 c = connection.cursor()
 
