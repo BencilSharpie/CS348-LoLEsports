@@ -1,10 +1,12 @@
 from django.shortcuts import render
 import logging
 from .models import Match, Champion, Team, Player
-from django.db.models import Q
+from django.db.models import Q, Max
+from .forms import DateTimeForm
 
 from django.http import HttpResponse
-
+from django.contrib import messages
+import datetime
 
 def home(request):
     top5Matches = Match.objects.exclude(outcome__isnull=True).values_list('team1_name', 'team2_name',
@@ -14,7 +16,29 @@ def home(request):
 
 
 def schedule(request):
-    return render(request, 'schedule.html')
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = DateTimeForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            data = form.cleaned_data
+            if Team.objects.filter(team_name =f"{data.get('team1_name')}").exists() and \
+                Team.objects.filter(team_name =f"{data.get('team2_name')}").exists():
+                dt = datetime.datetime.combine(data.get('date_field'), data.get('time_field'))
+                if Match.objects.filter(match_date = dt).exists():
+                    messages.success(request, 'Match time conflict!')
+                else:
+                    id = int(Match.objects.aggregate(maxVal = Max('match_id')).get('maxVal'))
+                    id += 1
+                    Match.objects.create(match_id = id, match_date = dt, team1_name = data.get('team1_name'),
+                                         team2_name = data.get('team2_name'))
+            else:
+                messages.success(request, 'Invalid team name selection!')
+            scheduleList = Match.objects.all().exclude(outcome__isnull=False)
+    else:
+        scheduleList = Match.objects.all().exclude(outcome__isnull=False)
+        form = DateTimeForm()
+    return render(request, 'schedule.html', {'form': form, 'scheduleList': scheduleList})
 
 
 def team(request):

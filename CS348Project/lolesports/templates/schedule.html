@@ -28,6 +28,13 @@ h1 {text-align: center;}
   background-color: #04AA6D;
   color: white;
 }
+#sub {
+   position:absolute;
+   margin-left:-50px;
+   left:50%;
+   width:100px;
+   bottom:200px;
+}
 </style>
 </head>
   
@@ -43,18 +50,27 @@ h1 {text-align: center;}
       <td><b>Team 1</b></td>
       <td><b>Team 2</b></td>
   </tr>
-  <tr>
-    <td>Date</td>
-    <td>Team 1</td>
-    <td>Team 2</td>
+
 </tr>
-<tr>
-    <td>Date</td>
-    <td>Team 1</td>
-    <td>Team 2</td>
-</tr>
-  
-  
+    <form action="/schedule" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input id = "sub" type="submit" value="Submit">
+    </form>
+    {% for match in scheduleList %}
+    <tr>
+        <td>{{ match.match_date }}</td>
+        <td>{{ match.team1_name }}</td>
+        <td>{{ match.team2_name }}</td>
+    <tr>
+    {% endfor %}
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+    {% endfor %}
+
+    {% endif %}
   
 </table>
 {% endblock %}
