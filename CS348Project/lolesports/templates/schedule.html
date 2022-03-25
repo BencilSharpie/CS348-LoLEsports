@@ -37,6 +37,10 @@ h1 {text-align: center;}
 }
 </style>
 </head>
+  
+{% extends "./menubar.html" %}
+{% block content %}
+  
 <body>
 <h1>Upcoming Matches</h1>
 <table id="schedule">
@@ -68,6 +72,5 @@ h1 {text-align: center;}
 
     {% endif %}
   
-  
-  
 </table>
+{% endblock %}

@@ -7,7 +7,7 @@
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 50%;
-  
+
   margin-left: auto;
   margin-right: auto;
 
@@ -29,8 +29,12 @@ h2 {text-align: center;}
 }
 </style>
 </head>
+  
+ {% extends "./menubar.html" %}
+{% block content %}
 <body>
-<h1>Faker</h1>
+  {% for i in playerInfo %}
+<h1>{{ i.ign }}</h1>
 
 
 <table id="players">
@@ -41,22 +45,22 @@ h2 {text-align: center;}
      </colgroup>
     <tr>
         <td><b>Name</b></td>
-        <td>Lee Sang-hyeok</td>  
+        <td>{{ i.name }}</td>
     </tr>
     <tr>
         <td><b>Country of Origin</b></td>
-        <td>Korea</td>
+        <td>{{ i.country }}</td>
     <tr>
         <td><b>Main Role</b></td>
-        <td>Mid</td>
+        <td>{{ i.role }}</td>
     </tr>
     <tr>
         <td><b>Team</b></td>
-        <td>T1</td>
+        <td>{{ i.team }}</td>
     </tr>
     <tr>
         <td><b>Salary</b></td>
-        <td>$200,000</td>
+        <td>{{ i.salary }}</td>
     </tr>
   </table>
 
@@ -72,17 +76,19 @@ h2 {text-align: center;}
      </colgroup>
     <tr>
         <td><b>Average KDA</b></td>
-        <td>12.0</td>  
+        <td>{{ i.kda_avg }}</td>
     </tr>
     <tr>
         <td><b>Average CS/min</b></td>
-        <td>9.6</td>
+        <td>{{ i.cs_avg }}</td>
     <tr>
         <td><b>MVP Count</b></td>
-        <td>18</td>
+        <td>{{ i.mvp_count }}</td>
     </tr>
-    
-  </table>
 
+  </table>
+{% endfor %}
 </body>
+
+  {% endblock %}
 </html>
