@@ -34,7 +34,10 @@ def playerName(request, playerName):
     return HttpResponse(f'The player is {playerName}')
 
 def teamName(request, teamName):
-    return HttpResponse(f'The team is {teamName}')
+    teamName = {
+        "name": teamName
+    }
+    return render(request, 'team_page.html', teamName)
 
 def champion(request):
     order_by = request.GET.get('order_by', '-win_rate')
