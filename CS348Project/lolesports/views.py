@@ -31,7 +31,11 @@ def match(request):
     return render(request, 'match.html')
 
 def playerName(request, playerName):
-    return HttpResponse(f'The player is {playerName}')
+    # playerName = {
+    #    "name": playerName
+    # }
+    playerInfo = Player.objects.filter(ign=playerName)
+    return render(request, 'player_page.html', {'playerInfo': playerInfo})
 
 def teamName(request, teamName):
     #teamName = {
