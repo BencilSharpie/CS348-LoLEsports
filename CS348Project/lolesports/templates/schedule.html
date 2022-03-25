@@ -55,9 +55,8 @@ h1 {text-align: center;}
     {% for match in scheduleList %}
         <tr>
             <td>{{ match.match_date }}</td>
-            <td><a href="/team/{{ match.team1_name }}">{{ match.team1_name }}</a></td>
-            
-            <td>{{ match.team2_name }}</td>
+            <td><a href="/team/{{ match.team1_name }}">{{ match.team1_name }}</a></td> 
+            <td><a href="/team/{{ match.team2_name }}">{{ match.team2_name }}</a></td>
         <tr>
     {% endfor %}
     <form action="/schedule" method="post">
