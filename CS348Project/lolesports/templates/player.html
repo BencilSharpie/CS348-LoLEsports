@@ -1,32 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 110%;
 
-}
-h1 {text-align: center;}
-h2 {text-align: center;}
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 14px;
-}
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-#customers tr:hover {background-color: #ddd;}
-#customers th {
-  padding-top: 25px;
-  padding-bottom: 25px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
-</style>
-</head>
+  <style>
+    h1 {text-align: center;}
+    p    {color: red;}
+    </style>
 <body>
-<h1>Player Page</h1>
+  <h1>Player Page</h1>
+
+  {% for i in playerList %}
+  <div class="row" style="margin-left: 50px;">
+    <a href="/player/{{ i.ign }}">{{ i.ign }}</a>
+  </div>
+{% endfor %}
 
 </body>
 </html>
