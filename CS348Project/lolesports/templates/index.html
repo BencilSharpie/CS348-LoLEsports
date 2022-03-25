@@ -33,42 +33,30 @@ h2 {text-align: center;}
   <tr>
       <td><b>Winner</b></td>
       <td><b>Loser</b></td>
-      <td><b>Score</b></td>
+      <td><b>Kills</b></td>
       <td><b>MVP</b></td>
   </tr>
-  <tr>
-      <td>Team 1</td>
-      <td>Team 2</td>
-      <td>Kill 1 - Kill 2</td>
-      <td>Person 1</td>
-  <tr>
-      <td>Team 1</td>
-      <td>Team 2</td>
-      <td>Kill 1 - Kill 2</td>
-      <td>Person 1</td>
-  </tr>
-  <tr>
-      <td>Team 1</td>
-      <td>Team 2</td>
-      <td>Kill 1 - Kill 2</td>
-      <td>Person 1</td>
-  </tr>
-  <tr>
-      <td>Team 1</td>
-      <td>Team 2</td>
-      <td>Kill 1 - Kill 2</td>
-      <td>Person 1</td>
-  </tr>
-  <tr>
-      <td>Team 1</td>
-      <td>Team 2</td>
-      <td>Kill 1 - Kill 2</td>
-      <td>Person 1</td>
-  </tr>
+    {% for match in top5Matches %}
+    {% if match.0 == match.2 %}
+    <tr>
+        <td>{{ match.0 }}</td>
+        <td>{{ match.1 }}</td>
+        <td>{{ match.3 }} - {{ match.4 }}</td>
+        <td>{{ match.5 }}</td>
+    <tr>
+    {% else %}
+    <tr>
+        <td>{{ match.1 }}</td>
+        <td>{{ match.0 }}</td>
+        <td>{{ match.4 }} - {{ match.3 }}</td>
+        <td>{{ match.5 }}</td>
+    <tr>
+    {% endif %}
+    {% endfor %}
 <div class="dropdown">
   <button class="dropbtn">Dropdown</button>
   <div class="dropdown-content">
-    <a href="#">Link 1</a>
+    <a href="/champion">Champions</a>
     <a href="#">Link 2</a>
     <a href="#">Link 3</a>
   </div>

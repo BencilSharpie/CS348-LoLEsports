@@ -1,0 +1,6 @@
+
+*.pyc
+.idea/misc.xml
+*.xml
+*.iml
+*.xml

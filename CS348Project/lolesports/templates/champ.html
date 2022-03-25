@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+#champs {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 110%;
+
+}
+h1 {text-align: center;}
+#champs td, #customers th {
+  border: 1px solid #ddd;
+  padding: 14px;
+}
+#champs tr:nth-child(even){background-color: #f2f2f2;}
+#champs tr:hover {background-color: #ddd;}
+#champs th {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+</head>
+<body>
+<h1>Champions</h1>
+<table id="champs">
+    <tr>
+        <td><b><a href="?order_by=name" id = "champ" onclick = ord_champ()>Champion</a></b></td>
+        <td><b><a href="?order_by=-win_rate" id = "wr">Win Rate</a></b></td>
+        <td><b><a href="?order_by=-pick_rate" id = "pr">Pick Rate</a></b></td>
+        <td><b><a href="?order_by=-ban_rate" id = "br">Ban Rate</a></b></td>
+    </tr>
+    {% for champ in champs %}
+    <tr>
+        <td>{{ champ.name }}</td>
+        <td>{{ champ.win_rate|floatformat:2 }}</td>
+        <td>{{ champ.pick_rate|floatformat:2 }}</td>
+        <td>{{ champ.ban_rate|floatformat:2 }}</td>
+    <tr>
+    {% endfor %}
+</table>
+</body>
+</html>
