@@ -246,6 +246,9 @@ connection.commit()
 c.execute("DROP TRIGGER IF EXISTS champ_recalc_ban_trigger;")
 connection.commit()
 c.execute("DROP TRIGGER IF EXISTS champ_recalc_win_trigger;")
+connection.commit()
+c.execute("DROP TRIGGER IF EXISTS team_recalc_winloss_trigger;")
+connection.commit()
 
 # create view
 c.execute("DROP VIEW IF EXISTS top5Matches;")
