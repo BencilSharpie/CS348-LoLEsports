@@ -52,24 +52,22 @@ h1 {text-align: center;}
   </tr>
 
 </tr>
+    {% for match in scheduleList %}
+        <tr>
+            <td>{{ match.match_date }}</td>
+            <td>{{ match.team1_name }}</td>
+            <td>{{ match.team2_name }}</td>
+        <tr>
+    {% endfor %}
     <form action="/schedule" method="post">
         {% csrf_token %}
         {{ form }}
         <input id = "sub" type="submit" value="Submit">
     </form>
-    {% for match in scheduleList %}
-    <tr>
-        <td>{{ match.match_date }}</td>
-        <td>{{ match.team1_name }}</td>
-        <td>{{ match.team2_name }}</td>
-    <tr>
-    {% endfor %}
     {% if messages %}
-    {% for message in messages %}
-    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
-
-    {% endfor %}
-
+        {% for message in messages %}
+            {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+        {% endfor %}
     {% endif %}
   
 </table>
