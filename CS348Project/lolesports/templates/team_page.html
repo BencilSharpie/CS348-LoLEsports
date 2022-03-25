@@ -108,7 +108,9 @@ h2 {text-align: center;}
     </tr>
     {% for player in teamPlayers %}
     <tr>
-      <td>{{ player.ign }}</td>
+      <td>
+        <a href="/player/{{ player.ign }}">{{ player.ign }}</a>
+      </td>
     </tr>
     {% endfor %}
   

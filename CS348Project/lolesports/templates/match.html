@@ -30,6 +30,8 @@ h1 {text-align: center;}
 }
 </style>
 </head>
+{% extends "./menubar.html" %}
+{% block content %}
 <body>
 <h1>Completed Matches</h1>
 <table id="schedule">
@@ -46,45 +48,25 @@ h1 {text-align: center;}
       <td><b>Match Length</b></td>
       <td><b>Patch</b></td>
   </tr>
+  {% for match in matchList %}
   <tr>
-    <td>Date</td>
-    <td>Team 1</td>
-    <td>Team 2</td>
-    <td>Winner</td>
-    <td>MVP</td>
-    <td>Score</td>
-    <td>Team 1 Gold</td>
-    <td>Team 2 Gold</td>
-    <td>Match Length</td>
-    <td>Patch</td>
+    <td> {{ match.match_date }} </td>
+    <td>
+      <a href="/team/{{ match.team1_name }}">{{ match.team1_name }}</a>
+    </td>
+    <td>
+      <a href="/team/{{ match.team2_name }}">{{ match.team2_name }}</a>
+    </td>
+    <td>{{ match.outcome }}</td>
+    <td>{{ match.mvp }}</td>
+    <td>{{ match.team1_kills }} - {{ match.team2_kills }}</td>
+    <td>{{ match.team1_gold }}</td>
+    <td>{{ match.team2_gold }}</td>
+    <td>{{ match.match_length }}</td>
+    <td>{{ match.patch }}</td>
 </tr>
-<tr>
-  <td>Date</td>
-  <td>Team 1</td>
-  <td>Team 2</td>
-  <td>Winner</td>
-  <td>MVP</td>
-  <td>Score</td>
-  <td>Team 1 Gold</td>
-  <td>Team 2 Gold</td>
-  <td>Match Length</td>
-  <td>Patch</td>
-</tr>
-<tr>
-  <td>Date</td>
-  <td>Team 1</td>
-  <td>Team 2</td>
-  <td>Winner</td>
-  <td>MVP</td>
-  <td>Score</td>
-  <td>Team 1 Gold</td>
-  <td>Team 2 Gold</td>
-  <td>Match Length</td>
-  <td>Patch</td>
-</tr>
-  
-
-  
-  
-  
+{% endfor %} 
 </table>
+</body>
+{% endblock %}
+</html>
