@@ -29,6 +29,9 @@ h2 {text-align: center;}
 }
 </style>
 </head>
+  
+ {% extends "./menubar.html" %}
+{% block content %}
 <body>
   {% for i in playerInfo %}
 <h1>{{ i.ign }}</h1>
@@ -87,4 +90,5 @@ h2 {text-align: center;}
 {% endfor %}
 </body>
 
+  {% endblock %}
 </html>
