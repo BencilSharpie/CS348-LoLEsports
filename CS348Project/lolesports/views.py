@@ -16,7 +16,11 @@ def schedule(request):
 
 
 def team(request):
-    return render(request, 'team.html')
+    teams = {
+        #hit the database here? get the list of teams, pass in?
+        "data" : ["Cloud9", "TSM", "Team_Liquid", "EG"],
+    }
+    return render(request, 'team.html', teams)
 
 
 def player(request):
@@ -26,6 +30,14 @@ def player(request):
 def match(request):
     return render(request, 'match.html')
 
+def playerName(request, playerName):
+    return HttpResponse(f'The player is {playerName}')
+
+def teamName(request, teamName):
+    teamName = {
+        "name": teamName
+    }
+    return render(request, 'team_page.html', teamName)
 
 def champion(request):
     order_by = request.GET.get('order_by', '-win_rate')

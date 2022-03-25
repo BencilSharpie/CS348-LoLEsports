@@ -7,4 +7,6 @@ urlpatterns = [
     path('player', views.player),
     path('match', views.match),
     path('champion', views.champion),
+    path('team/<teamName>', views.teamName, name='teamName'),
+    path('player/<playerName>', views.playerName, name='playerName'),
 ]
