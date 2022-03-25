@@ -18,7 +18,8 @@
 
 #roster th {
   padding-top: 25px;
-  padding-bottom: 25px;
+  padding-bottom: 100px;
+  margin-bottom: 100px;
   text-align: left;
   background-color: #04AA6D;
   color: white;
@@ -51,8 +52,14 @@ h2 {text-align: center;}
 </style>
 </head>
 <body>
-<h1>{{ name }}</h1>
-<h2>Last 5 Matches</h2>
+  {% for teamData in teamInfo %}
+    <tr>
+        <td>{{ champ.team_name }}</td>
+        <td>{{ champ.num_win }}</td>
+    <tr>
+    
+<h1>{{ teamData.team_name }}</h1>
+<h2>Schedule</h2>
 <table id="customers">
   
   <tr>
@@ -63,45 +70,31 @@ h2 {text-align: center;}
       <td><b>Score</b></td>
       <td><b>Match Length</b></td>
   </tr>
+  
+  {% for match in teamMatches %}
   <tr>
-      <td>Date 1</td>
-      <td>Opponent 1</td>
-      <td>Winner 1</td>
-      <td>MVP 1</td>
-      <td>Winner Kills - Loser Kills</td>
-      <td>Match Length 1</td>
-  <tr>
-    <td>Date 2</td>
-    <td>Opponent 2</td>
-    <td>Winner 2</td>
-    <td>MVP 2</td>
-    <td>Winner Kills - Loser Kills</td>
-    <td>Match Length 2</td>
+    <td> {{ match.match_date }} </td>
+    {% if match.team1_name == teamData.team_name %}
+    <td>
+      <a href="/team/{{ match.team2_name }}">{{ match.team2_name }}</a>
+    </td>
+    {% else %}
+    <td><a href="/team/{{ match.team1_name }}">{{ match.team1_name }}</a></td>
+    {% endif %}
+    {% if match.outcome == teamData.team_name %}
+    <td style="color: #04AA6D;">{{ match.outcome }}</td>
+    {% else %}
+    <td style="color: red">{{ match.outcome }}</td>
+    {% endif %}
+    <td>{{ match.mvp }}</td>
+    {% if match.team1_name == match.outcome %}
+    <td>{{ match.team1_kills }} - {{ match.team2_kills }}</td>
+    {% else %}
+    <td>{{ match.team2_kills }} - {{ match.team1_kills }}</td>
+    {% endif %}
+    <td>{{ match.match_length }}</td>
   </tr>
-  <tr>
-    <td>Date 3</td>
-    <td>Opponent 3</td>
-    <td>Winner 3</td>
-    <td>MVP 4</td>
-    <td>Winner Kills - Loser Kills</td>
-    <td>Match Length 4</td>
-  </tr>
-  <tr>
-    <td>Date 4</td>
-    <td>Opponent 4</td>
-    <td>Winner 4</td>
-    <td>MVP 4</td>
-    <td>Winner Kills - Loser Kills</td>
-    <td>Match Length 4</td>
-  </tr>
-  <tr>
-    <td>Date 5</td>
-    <td>Opponent 5</td>
-    <td>Winner 5</td>
-    <td>MVP 5</td>
-    <td>Winner Kills - Loser Kills</td>
-    <td>Match Length 5</td>
-  </tr>
+  {% endfor %}
 </table>
 
 <br><br>
@@ -111,21 +104,11 @@ h2 {text-align: center;}
     <tr>
       <td><b>Roster</b></td>
     </tr>
+    {% for player in teamPlayers %}
     <tr>
-      <td>Player 1</td>
+      <td>{{ player.ign }}</td>
     </tr>
-    <tr>
-      <td>Player 2</td>
-    </tr>
-    <tr>
-      <td>Player 3</td>
-    </tr>
-    <tr>
-      <td>Player 4</td>
-    </tr>
-    <tr>
-      <td>Player 5</td>
-    </tr>
+    {% endfor %}
   
   </table>
 </span>
@@ -135,16 +118,17 @@ h2 {text-align: center;}
   <caption>Team Summary</caption>
   <tr>
     <td>Wins</td>
-    <td>number</td>
+    <td>{{ teamData.num_win }}</td>
   </tr>
   <tr>
     <td>Losses</td>
-    <td>number</td>
+    <td>{{ teamData.num_loss }}</td>
   </tr>
   <tr>
     <td>Ranking</td>
-    <td>Rank</td>
+    <td>{{ teamData.lcs_rank }}</td>
   </tr>
 </table>
+{% endfor %}
 </body>
 </html>

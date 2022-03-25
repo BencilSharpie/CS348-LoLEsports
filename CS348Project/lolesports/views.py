@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from .models import Match, Champion
+import logging
+from .models import Match, Champion, Team, Player
+from django.db.models import Q
 
 from django.http import HttpResponse
 
@@ -16,11 +18,8 @@ def schedule(request):
 
 
 def team(request):
-    teams = {
-        #hit the database here? get the list of teams, pass in?
-        "data" : ["Cloud9", "TSM", "Team_Liquid", "EG"],
-    }
-    return render(request, 'team.html', teams)
+    teamList = Team.objects.all()
+    return render(request, 'team.html', {'teamList': teamList})
 
 
 def player(request):
@@ -34,10 +33,21 @@ def playerName(request, playerName):
     return HttpResponse(f'The player is {playerName}')
 
 def teamName(request, teamName):
-    teamName = {
-        "name": teamName
+    #teamName = {
+    #    "name": teamName
+    #}
+    teamInfo = Team.objects.filter(team_name=teamName)
+    logging.basicConfig(level=logging.INFO) # Here
+    logging.info(teamInfo)
+    teamPlayers = Player.objects.filter(team=teamName)
+    teamMatches= Match.objects.filter(Q(team1_name = teamName) | Q(team2_name = teamName))
+    teamPassInfo = {
+        'teamInfo': teamInfo,
+        'teamPlayers': teamPlayers,
+        'teamMatches': teamMatches
     }
-    return render(request, 'team_page.html', teamName)
+    
+    return render(request, 'team_page.html', teamPassInfo)
 
 def champion(request):
     order_by = request.GET.get('order_by', '-win_rate')
