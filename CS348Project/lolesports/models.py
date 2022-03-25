@@ -21,7 +21,7 @@ class Champion(models.Model):
 
 class Match(models.Model):
     match_id = models.IntegerField(primary_key=True)
-    match_date = models.TextField(blank=True, null=True)
+    match_date = models.DateTimeField(blank=True, null=True)
     team1_name = models.TextField(blank=True, null=True)  # This field type is a guess.
     team2_name = models.TextField(blank=True, null=True)  # This field type is a guess.
     outcome = models.TextField(blank=True, null=True)  # This field type is a guess.
@@ -29,7 +29,7 @@ class Match(models.Model):
     team2_kills = models.IntegerField(blank=True, null=True)
     team1_gold = models.IntegerField(blank=True, null=True)
     team2_gold = models.IntegerField(blank=True, null=True)
-    match_length = models.TimeField(blank=True, null=True)
+    match_length = models.TextField(blank=True, null=True)
     mvp = models.TextField(blank=True, null=True)  # This field type is a guess.
     patch = models.TextField(blank=True, null=True)  # This field type is a guess.
 
