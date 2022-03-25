@@ -8,9 +8,9 @@
 <body>
   <h1>Team Page</h1>
 
-  {% for i in data %}
+  {% for i in teamList %}
   <div class="row" style="margin-left: 50px;">
-    <a href="/team/{{ i }}">{{ i }}</a>
+    <a href="/team/{{ i.team_name }}">{{ i.team_name }}</a>
   </div>
 {% endfor %}
 
