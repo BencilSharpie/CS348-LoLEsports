@@ -23,7 +23,8 @@ def team(request):
 
 
 def player(request):
-    return render(request, 'player.html')
+    playerList = Player.objects.all()
+    return render(request, 'player.html', {'playerList': playerList})
 
 
 def match(request):
