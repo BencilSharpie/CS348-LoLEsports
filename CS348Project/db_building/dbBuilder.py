@@ -49,7 +49,7 @@ c.execute("CREATE TABLE match ("
           "team2_kills INTEGER,"
           "team1_gold INTEGER,"
           "team2_gold INTEGER,"
-          "match_length TIME,"
+          "match_length NVARCHAR(1024),"
           "mvp NVARCHAR(1024), "
           "patch NVARCHAR(1024)"
           ");")
