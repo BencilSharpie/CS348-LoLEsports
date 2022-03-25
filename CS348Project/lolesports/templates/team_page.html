@@ -81,7 +81,11 @@ h2 {text-align: center;}
     {% else %}
     <td><a href="/team/{{ match.team1_name }}">{{ match.team1_name }}</a></td>
     {% endif %}
-    <td>{{ match.outcome }}</td>
+    {% if match.outcome == teamData.team_name %}
+    <td style="color: #04AA6D;">{{ match.outcome }}</td>
+    {% else %}
+    <td style="color: red">{{ match.outcome }}</td>
+    {% endif %}
     <td>{{ match.mvp }}</td>
     {% if match.team1_name == match.outcome %}
     <td>{{ match.team1_kills }} - {{ match.team2_kills }}</td>
