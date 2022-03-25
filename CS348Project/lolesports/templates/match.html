@@ -58,7 +58,9 @@ h1 {text-align: center;}
       <a href="/team/{{ match.team2_name }}">{{ match.team2_name }}</a>
     </td>
     <td>{{ match.outcome }}</td>
-    <td>{{ match.mvp }}</td>
+    <td>
+        <a href="/player/{{ match.mvp }}">{{ match.mvp }}</a>
+    </td>
     <td>{{ match.team1_kills }} - {{ match.team2_kills }}</td>
     <td>{{ match.team1_gold }}</td>
     <td>{{ match.team2_gold }}</td>
