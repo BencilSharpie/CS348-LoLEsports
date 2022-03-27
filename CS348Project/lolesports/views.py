@@ -70,7 +70,7 @@ def teamName(request, teamName):
     logging.basicConfig(level=logging.INFO) # Here
     logging.info(teamInfo)
     teamPlayers = Player.objects.filter(team=teamName)
-    teamMatches= Match.objects.filter(Q(team1_name = teamName) | Q(team2_name = teamName))
+    teamMatches= Match.objects.filter(Q(team1_name = teamName) | Q(team2_name = teamName)).exclude(outcome__isnull=True)
     teamPassInfo = {
         'teamInfo': teamInfo,
         'teamPlayers': teamPlayers,
