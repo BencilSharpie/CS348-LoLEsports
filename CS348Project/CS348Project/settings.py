@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'CS348Project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db_building/lcs2021.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'lcs2021',
+        'USER': 'root',
+        'PASSWORD': '<fill in>',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 

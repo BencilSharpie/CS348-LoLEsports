@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `lcs2021` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `lcs2021`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: lcs2021
@@ -39,7 +37,7 @@ CREATE TABLE `champion` (
 
 LOCK TABLES `champion` WRITE;
 /*!40000 ALTER TABLE `champion` DISABLE KEYS */;
-INSERT INTO `champion` VALUES ('Aatrox',13.48315,4.49438,41.66667),('Ahri',1.12360,0.00000,100.00000),('Alistar',43.82023,22.47191,46.15385),('Aphelios',11.23596,5.61798,60.00000),('Ashe',2.24719,0.00000,50.00000),('Aurelion Sol',0.00000,1.12360,0.00000),('Azir',42.69663,31.46067,52.63158),('Bard',2.24719,1.12360,50.00000),('Blitzcrank',5.61798,1.12360,40.00000),('Caitlyn',3.37079,0.00000,33.33333),('Camille',20.22472,31.46067,44.44444),('Cassiopeia',0.00000,1.12360,0.00000),('Chogath',3.37079,0.00000,100.00000),('Corki',3.37079,0.00000,0.00000),('Dr. Mundo',4.49438,0.00000,50.00000),('Draven',2.24719,1.12360,0.00000),('Ekko',2.24719,0.00000,100.00000),('Ezreal',5.61798,5.61798,40.00000),('Galio',11.23596,10.11236,60.00000),('Gangplank',20.22472,29.21348,38.88889),('Garen',0.00000,1.12360,0.00000),('Gnar',34.83146,34.83146,51.61290),('Gragas',32.58427,21.34831,41.37931),('Graves',16.85393,11.23596,26.66667),('Hecarim',40.44944,28.08989,52.77778),('Irelia',4.49438,17.97753,75.00000),('Ivern',1.12360,0.00000,0.00000),('Janna',2.24719,0.00000,50.00000),('Jarvan IV',3.37079,2.24719,66.66666),('Jax',2.24719,0.00000,100.00000),('Jayce',4.49438,7.86517,50.00000),('Jhin',3.37079,1.12360,33.33333),('Jinx',4.49438,3.37079,25.00000),('Kaisa',62.92135,23.59551,55.35714),('Kalista',8.98876,13.48315,62.50000),('Karma',3.37079,3.37079,66.66666),('Kayn',4.49438,1.12360,25.00000),('Kennen',2.24719,0.00000,0.00000),('Kindred',1.12360,2.24719,100.00000),('Kled',3.37079,2.24719,66.66666),('Leblanc',3.37079,1.12360,66.66666),('Leona',13.48315,5.61798,41.66667),('Lillia',34.83146,26.96629,58.06452),('Lucian',10.11236,12.35955,44.44444),('Lulu',4.49438,2.24719,50.00000),('Malphite',1.12360,1.12360,100.00000),('Malzahar',0.00000,1.12360,0.00000),('Maokai',1.12360,0.00000,0.00000),('Miss Fortune',5.61798,2.24719,80.00000),('Morgana',2.24719,2.24719,0.00000),('Nautilus',16.85393,4.49438,53.33333),('Neeko',2.24719,0.00000,50.00000),('Nidalee',10.11236,10.11236,55.55556),('Nocturne',2.24719,3.37079,0.00000),('Olaf',24.71910,67.41573,63.63636),('Orianna',35.95506,24.71910,56.25000),('Ornn',2.24719,0.00000,0.00000),('Pantheon',7.86517,25.84270,85.71429),('Quinn',1.12360,0.00000,100.00000),('Rakan',8.98876,5.61798,62.50000),('Reksai',2.24719,2.24719,100.00000),('Rell',48.31461,43.82023,55.81395),('Renekton',30.33708,52.80899,62.96296),('Rengar',1.12360,0.00000,0.00000),('Rumble',1.12360,0.00000,100.00000),('Ryze',5.61798,7.86517,80.00000),('Samira',11.23596,4.49438,20.00000),('Senna',17.97753,46.06742,37.50000),('Seraphine',13.48315,64.04495,50.00000),('Sett',2.24719,2.24719,50.00000),('Shen',8.98876,8.98876,62.50000),('Sion',12.35955,4.49438,18.18182),('Sivir',2.24719,0.00000,100.00000),('Skarner',13.48315,3.37079,33.33333),('Sylas',5.61798,2.24719,60.00000),('Syndra',29.21348,25.84270,38.46154),('Tahmkench',16.85393,2.24719,40.00000),('Taiyah',1.12360,0.00000,0.00000),('Taliyah',11.23596,7.86517,40.00000),('Thresh',17.97753,39.32584,43.75000),('Tristana',32.58427,23.59551,62.06897),('Twisted Fate',10.11236,32.58427,33.33333),('Udyr',20.22472,77.52809,50.00000),('Varus',1.12360,1.12360,100.00000),('Vayne',3.37079,1.12360,33.33333),('Veigar',1.12360,0.00000,100.00000),('Viktor',14.60674,4.49438,38.46154),('Xayah',20.22472,11.23596,44.44444),('Yasuo',1.12360,0.00000,100.00000),('Yone',6.74157,6.74157,66.66666),('Ziggs',1.12360,0.00000,0.00000),('Zoe',10.11236,5.61798,44.44444);
+INSERT INTO `champion` VALUES ('Aatrox',13.48315,4.49438,41.66667),('Ahri',1.12360,0.00000,100.00000),('Alistar',43.82022,22.47191,46.15385),('Aphelios',11.23596,5.61798,60.00000),('Ashe',2.24719,0.00000,50.00000),('Aurelion Sol',0.00000,1.12360,0.00000),('Azir',42.69663,31.46067,52.63158),('Bard',2.24719,1.12360,50.00000),('Blitzcrank',5.61798,1.12360,40.00000),('Caitlyn',3.37079,0.00000,33.33333),('Camille',20.22472,31.46067,44.44444),('Cassiopeia',0.00000,1.12360,0.00000),('Chogath',3.37079,0.00000,100.00000),('Corki',3.37079,0.00000,0.00000),('Dr. Mundo',4.49438,0.00000,50.00000),('Draven',2.24719,1.12360,0.00000),('Ekko',2.24719,0.00000,100.00000),('Ezreal',5.61798,5.61798,40.00000),('Galio',11.23596,10.11236,60.00000),('Gangplank',20.22472,29.21348,38.88889),('Garen',0.00000,1.12360,0.00000),('Gnar',34.83146,34.83146,51.61290),('Gragas',32.58427,21.34831,41.37931),('Graves',16.85393,11.23596,26.66667),('Hecarim',40.44944,28.08989,52.77778),('Irelia',4.49438,17.97753,75.00000),('Ivern',1.12360,0.00000,0.00000),('Janna',2.24719,0.00000,50.00000),('Jarvan IV',3.37079,2.24719,66.66667),('Jax',2.24719,0.00000,100.00000),('Jayce',4.49438,7.86517,50.00000),('Jhin',3.37079,1.12360,33.33333),('Jinx',4.49438,3.37079,25.00000),('Kaisa',62.92135,23.59551,55.35714),('Kalista',8.98876,13.48315,62.50000),('Karma',3.37079,3.37079,66.66667),('Kayn',4.49438,1.12360,25.00000),('Kennen',2.24719,0.00000,0.00000),('Kindred',1.12360,2.24719,100.00000),('Kled',3.37079,2.24719,66.66667),('Leblanc',3.37079,1.12360,66.66667),('Leona',13.48315,5.61798,41.66667),('Lillia',34.83146,26.96629,58.06452),('Lucian',10.11236,12.35955,44.44444),('Lulu',4.49438,2.24719,50.00000),('Malphite',1.12360,1.12360,100.00000),('Malzahar',0.00000,1.12360,0.00000),('Maokai',1.12360,0.00000,0.00000),('Miss Fortune',5.61798,2.24719,80.00000),('Morgana',2.24719,2.24719,0.00000),('Nautilus',16.85393,4.49438,53.33333),('Neeko',2.24719,0.00000,50.00000),('Nidalee',10.11236,10.11236,55.55556),('Nocturne',2.24719,3.37079,0.00000),('Olaf',24.71910,67.41573,63.63636),('Orianna',35.95506,24.71910,56.25000),('Ornn',2.24719,0.00000,0.00000),('Pantheon',7.86517,25.84270,85.71429),('Quinn',1.12360,0.00000,100.00000),('Rakan',8.98876,5.61798,62.50000),('Reksai',2.24719,2.24719,100.00000),('Rell',48.31461,43.82022,55.81395),('Renekton',30.33708,52.80899,62.96296),('Rengar',1.12360,0.00000,0.00000),('Rumble',1.12360,0.00000,100.00000),('Ryze',5.61798,7.86517,80.00000),('Samira',11.23596,4.49438,20.00000),('Senna',17.97753,46.06742,37.50000),('Seraphine',13.48315,64.04494,50.00000),('Sett',2.24719,2.24719,50.00000),('Shen',8.98876,8.98876,62.50000),('Sion',12.35955,4.49438,18.18182),('Sivir',2.24719,0.00000,100.00000),('Skarner',13.48315,3.37079,33.33333),('Sylas',5.61798,2.24719,60.00000),('Syndra',29.21348,25.84270,38.46154),('Tahmkench',16.85393,2.24719,40.00000),('Taiyah',1.12360,0.00000,0.00000),('Taliyah',11.23596,7.86517,40.00000),('Thresh',17.97753,39.32584,43.75000),('Tristana',32.58427,23.59551,62.06897),('Twisted Fate',10.11236,32.58427,33.33333),('Udyr',20.22472,77.52809,50.00000),('Varus',1.12360,1.12360,100.00000),('Vayne',3.37079,1.12360,33.33333),('Veigar',1.12360,0.00000,100.00000),('Viktor',14.60674,4.49438,38.46154),('Xayah',20.22472,11.23596,44.44444),('Yasuo',1.12360,0.00000,100.00000),('Yone',6.74157,6.74157,66.66667),('Ziggs',1.12360,0.00000,0.00000),('Zoe',10.11236,5.61798,44.44444);
 /*!40000 ALTER TABLE `champion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,7 +49,7 @@ DROP TABLE IF EXISTS `match`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `match` (
-  `match_id` tinyint NOT NULL DEFAULT '0',
+  `match_id` tinyint NOT NULL,
   `match_date` datetime DEFAULT NULL,
   `team1_name` varchar(64) DEFAULT NULL,
   `team2_name` varchar(64) DEFAULT NULL,
@@ -60,7 +58,7 @@ CREATE TABLE `match` (
   `team2_kills` tinyint DEFAULT NULL,
   `team1_gold` mediumint DEFAULT NULL,
   `team2_gold` mediumint DEFAULT NULL,
-  `match_length` time DEFAULT NULL,
+  `match_length` varchar(64) DEFAULT NULL,
   `mvp` varchar(64) DEFAULT NULL,
   `patch` decimal(3,1) DEFAULT NULL,
   PRIMARY KEY (`match_id`)
@@ -76,6 +74,23 @@ LOCK TABLES `match` WRITE;
 INSERT INTO `match` VALUES (1,'2021-02-05 18:00:00','TSM','FlyQuest','FlyQuest',9,20,68200,73500,'00:40:00','Josedeodo',11.2),(2,'2021-02-05 19:00:00','Team Liquid','Immortals','Immortals',6,14,59400,64600,'00:35:00','Destiny',11.2),(3,'2021-02-05 20:00:00','Evil Geniuses','100 Thieves','100 Thieves',15,15,75400,81200,'00:46:00','huhi',11.2),(4,'2021-02-05 21:00:00','Golden Guardians','Cloud9','Cloud9',5,15,50000,59200,'00:31:00','Blaber',11.2),(5,'2021-02-05 22:00:00','Counter Logic Gaming','Dignitas','Dignitas',16,21,61900,67700,'00:34:00','Neo',11.2),(6,'2021-02-06 16:00:00','FlyQuest','Evil Geniuses','Evil Geniuses',14,22,57000,64000,'00:33:00','Impact',11.2),(7,'2021-02-06 17:00:00','Dignitas','Team Liquid','Team Liquid',6,9,42200,52800,'00:27:00','Alphari',11.2),(8,'2021-02-06 18:00:00','100 Thieves','Counter Logic Gaming','100 Thieves',21,23,93400,84700,'00:49:00','Damonte',11.2),(9,'2021-02-06 19:00:00','Cloud9','TSM','Cloud9',26,10,62300,44700,'00:28:00','Blaber',11.2),(10,'2021-02-06 20:00:00','Immortals','Golden Guardians','Golden Guardians',15,9,82700,89200,'00:48:00','Niles',11.2),(11,'2021-02-07 16:00:00','FlyQuest','Team Liquid','Team Liquid',11,16,49700,60800,'00:31:00','Santorin',11.2),(12,'2021-02-07 17:00:00','Evil Geniuses','Golden Guardians','Evil Geniuses',22,6,58500,44100,'00:28:00','Deftly',11.2),(13,'2021-02-07 19:00:00','Counter Logic Gaming','TSM','TSM',10,14,75900,82800,'00:45:00','PowerOfEvil',11.2),(14,'2021-02-07 20:00:00','100 Thieves','Dignitas','100 Thieves',14,4,60900,44300,'00:30:00','Closer',11.2),(15,'2021-02-12 18:00:00','100 Thieves','FlyQuest','100 Thieves',15,18,59500,52400,'00:31:00','FBI',11.3),(16,'2021-02-12 19:00:00','Counter Logic Gaming','Team Liquid','Team Liquid',3,18,38100,49800,'00:24:00','Jensen',11.3),(17,'2021-02-12 20:00:00','Evil Geniuses','Cloud9','Evil Geniuses',26,10,62900,51000,'00:31:00','Svenskeren',11.3),(18,'2021-02-12 21:00:00','TSM','Golden Guardians','TSM',15,10,62800,56300,'00:33:00','PowerOfEvil',11.3),(19,'2021-02-12 22:00:00','Dignitas','Immortals','Dignitas',16,5,60000,49500,'00:30:00','aphromoo',11.3),(20,'2021-02-13 16:00:00','FlyQuest','Counter Logic Gaming','FlyQuest',20,6,57800,46500,'00:28:00','Palafox',11.3),(21,'2021-02-13 17:00:00','Cloud9','100 Thieves','Cloud9',30,18,69700,58100,'00:33:00','Perkz',11.3),(22,'2021-02-13 18:00:00','Golden Guardians','Dignitas','Dignitas',4,16,48300,57300,'00:29:00','Dardoch',11.3),(23,'2021-02-13 19:00:00','TSM','Team Liquid','TSM',12,3,64100,51400,'00:32:00','PowerOfEvil',11.3),(24,'2021-02-13 20:00:00','Immortals','Evil Geniuses','Immortals',19,4,60200,46900,'00:30:00','Xerxe',11.3),(25,'2021-02-14 16:00:00','Team Liquid','100 Thieves','100 Thieves',13,11,57000,50500,'00:30:00','Closer',11.3),(26,'2021-02-14 17:00:00','Immortals','TSM','TSM',5,14,46500,57500,'00:29:00','Huni',11.3),(27,'2021-02-14 18:00:00','Evil Geniuses','Dignitas','Dignitas',9,21,49100,60900,'00:32:00','Soligo',11.3),(28,'2021-02-14 19:00:00','Cloud9','FlyQuest','Cloud9',16,6,58200,46000,'00:29:00','Blaber',11.3),(29,'2021-02-14 20:00:00','Golden Guardians','Counter Logic Gaming','Counter Logic Gaming',17,5,62500,51000,'00:32:00','Finn',11.3),(30,'2021-02-19 18:00:00','Counter Logic Gaming','Cloud9','Cloud9',17,21,70400,77300,'00:39:00','Perkz',11.3),(31,'2021-02-19 19:00:00','Dignitas','FlyQuest','Dignitas',22,7,60900,49600,'00:30:00','FakeGod',11.3),(32,'2021-02-19 20:00:00','Golden Guardians','Team Liquid','Team Liquid',2,16,33200,47900,'00:23:00','Jensen',11.3),(33,'2021-02-19 21:00:00','TSM','Evil Geniuses','TSM',17,8,54200,44600,'00:27:00','PowerOfEvil',11.3),(34,'2021-02-19 22:00:00','Immortals','100 Thieves','100 Thieves',8,13,46600,56800,'00:29:00','huhi',11.3),(35,'2021-02-20 16:00:00','Cloud9','Dignitas','Cloud9',21,7,54600,45600,'00:23:00','Perkz',11.3),(36,'2021-02-20 17:00:00','Counter Logic Gaming','Immortals','Immortals',4,18,54600,65100,'00:34:00','Raes',11.3),(37,'2021-02-20 18:00:00','TSM','100 Thieves','TSM',15,2,66100,52100,'00:32:00','SwordArt',11.3),(38,'2021-02-20 19:00:00','Team Liquid','Evil Geniuses','Evil Geniuses',11,18,55300,60500,'00:33:00','Impact',11.3),(39,'2021-02-20 20:00:00','FlyQuest','Golden Guardians','FlyQuest',16,2,53900,42700,'00:28:00','Licorice',11.3),(40,'2021-02-21 16:00:00','Dignitas','TSM','Dignitas',20,7,56200,45900,'00:28:00','Dardoch',11.3),(41,'2021-02-21 17:00:00','Immortals','FlyQuest','Immortals',22,9,75700,63600,'00:39:00','Xerxe',11.3),(42,'2021-02-21 18:00:00','100 Thieves','Golden Guardians','Golden Guardians',16,16,93900,102400,'00:56:00','Stixxay',11.3),(43,'2021-02-21 19:00:00','Team Liquid','Cloud9','Team Liquid',24,11,62400,50200,'00:30:00','Santorin',11.3),(44,'2021-02-21 20:00:00','Evil Geniuses','Counter Logic Gaming','Evil Geniuses',13,8,80500,68300,'00:42:00','Svenskeren',11.3),(45,'2021-02-26 18:00:00','Cloud9','Golden Guardians','Cloud9',12,4,54700,42300,'00:28:00','Vulcan',11.4),(46,'2021-02-26 19:00:00','Team Liquid','TSM','TSM',18,14,70100,73500,'00:40:00','Spica',11.4),(47,'2021-02-26 20:00:00','Evil Geniuses','FlyQuest','Evil Geniuses',16,15,75500,70600,'00:44:00','Jiizuke',11.4),(48,'2021-02-26 21:00:00','Counter Logic Gaming','100 Thieves','100 Thieves',17,15,68400,72700,'00:40:00','Closer',11.4),(49,'2021-02-26 22:00:00','Immortals','Dignitas','Dignitas',4,10,44700,54200,'00:29:00','FakeGod',11.4),(50,'2021-02-27 16:00:00','Team Liquid','FlyQuest','Team Liquid',11,5,59100,47400,'00:30:00','Tactical',11.4),(51,'2021-02-27 17:00:00','Cloud9','Evil Geniuses','Cloud9',19,9,59000,51100,'00:31:00','Blaber',11.4),(52,'2021-02-27 18:00:00','Dignitas','100 Thieves','100 Thieves',17,18,73800,80100,'00:42:00','Ssumday',11.4),(53,'2021-02-27 19:00:00','TSM','Counter Logic Gaming','TSM',15,5,69600,56600,'00:35:00','Huni',11.4),(54,'2021-02-27 20:00:00','Golden Guardians','Immortals','Immortals',4,10,54300,65300,'00:35:00','Insanity',11.4),(55,'2021-02-28 16:00:00','FlyQuest','TSM','FlyQuest',12,4,68700,64700,'00:37:00','Palafox',11.4),(56,'2021-02-28 17:00:00','100 Thieves','Cloud9','Cloud9',2,14,39400,46500,'00:24:00','Blaber',11.4),(57,'2021-02-28 18:00:00','Immortals','Team Liquid','Team Liquid',7,16,51000,65100,'00:32:00','Alphari',11.4),(58,'2021-02-28 19:00:00','Golden Guardians','Evil Geniuses','Evil Geniuses',21,15,77800,68300,'00:40:00','IgNar',11.4),(59,'2021-02-28 20:00:00','Dignitas','Counter Logic Gaming','Counter Logic Gaming',10,15,54400,60400,'00:34:00','Smoothie',11.4),(60,'2021-03-05 18:00:00','TSM','Dignitas','Dignitas',14,12,65000,64000,'00:36:00','FakeGod',11.4),(61,'2021-03-05 19:00:00','100 Thieves','Evil Geniuses','Evil Geniuses',7,11,53000,63100,'00:33:00','Deftly',11.4),(62,'2021-03-05 20:00:00','FlyQuest','Cloud9','Cloud9',4,14,35700,51600,'00:23:00','Perkz',11.4),(63,'2021-03-05 21:00:00','Team Liquid','Golden Guardians','Team Liquid',16,2,61000,46800,'00:31:00','Santorin',11.4),(64,'2021-03-05 22:00:00','Immortals','Counter Logic Gaming','Counter Logic Gaming',3,12,39500,51100,'00:26:00','WildTurtle',11.4),(65,'2021-03-06 16:00:00','Dignitas','Golden Guardians','Dignitas',24,11,75300,66200,'00:39:00','Neo',11.4),(66,'2021-03-06 17:00:00','100 Thieves','TSM','TSM',6,16,46200,55500,'00:30:00','Lost',11.4),(67,'2021-03-06 18:00:00','Cloud9','Team Liquid','Team Liquid',7,13,67900,76400,'00:40:00','Alphari',11.4),(68,'2021-03-06 19:00:00','Evil Geniuses','Immortals','Immortals',7,19,54500,62600,'00:32:00','Destiny',11.4),(69,'2021-03-06 20:00:00','Counter Logic Gaming','FlyQuest','FlyQuest',12,24,61900,72400,'00:36:00','Josedeodo',11.4),(70,'2021-03-07 16:00:00','Golden Guardians','100 Thieves','100 Thieves',25,7,62100,47600,'00:30:00','Closer',11.4),(71,'2021-03-07 17:00:00','Dignitas','Evil Geniuses','Dignitas',21,29,75700,83900,'00:43:00','FakeGod',11.4),(72,'2021-03-07 18:00:00','TSM','Cloud9','TSM',23,11,67300,59000,'00:34:00','SwordArt',11.4),(73,'2021-03-07 19:00:00','Team Liquid','Counter Logic Gaming','Counter Logic Gaming',6,18,63200,74100,'00:38:00','Pobelter',11.4),(74,'2021-03-07 20:00:00','FlyQuest','Immortals','Immortals',4,14,40800,51200,'00:26:00','Raes',11.4),(75,'2021-03-12 18:00:00','Cloud9','Counter Logic Gaming','Counter Logic Gaming',9,19,54700,62300,'00:32:00','Finn',11.5),(76,'2021-03-12 19:00:00','Evil Geniuses','TSM','Evil Geniuses',16,4,70900,55400,'00:37:00','Impact',11.5),(77,'2021-03-12 20:00:00','100 Thieves','Immortals','100 Thieves',12,8,62400,56400,'00:34:00','FBI',11.5),(78,'2021-03-12 21:00:00','Team Liquid','Dignitas','Team Liquid',14,4,56900,46600,'00:29:00','Alphari',11.5),(79,'2021-03-12 22:00:00','Golden Guardians','FlyQuest','FlyQuest',10,13,73100,77800,'00:43:00','Johnsun',11.5),(80,'2021-03-13 16:00:00','TSM','Immortals','TSM',14,6,59300,48100,'00:31:00','PowerOfEvil',11.5),(81,'2021-03-13 17:00:00','Dignitas','Cloud9','Cloud9',5,16,50700,64100,'00:32:00','Vulcan',11.5),(82,'2021-03-13 18:00:00','FlyQuest','100 Thieves','100 Thieves',11,20,57500,67300,'00:34:00','FBI',11.5),(83,'2021-03-13 19:00:00','Evil Geniuses','Team Liquid','Team Liquid',7,21,54600,67500,'00:34:00','Santorin',11.5),(84,'2021-03-13 20:00:00','Counter Logic Gaming','Golden Guardians','Golden Guardians',4,19,66000,81000,'00:41:00','Ablazeolive',11.5),(85,'2021-03-14 16:00:00','FlyQuest','Dignitas','Dignitas',21,17,74500,70600,'00:38:00','FakeGod',11.5),(86,'2021-03-14 17:00:00','Golden Guardians','TSM','TSM',4,21,44200,59700,'00:28:00','Spica',11.5),(87,'2021-03-14 18:00:00','100 Thieves','Team Liquid','Team Liquid',6,17,49800,63600,'00:31:00','Santorin',11.5),(88,'2021-03-14 19:00:00','Evil Geniuses','Counter Logic Gaming','Evil Geniuses',24,18,75500,74300,'00:39:00','Jiizuke',11.5),(89,'2021-03-14 20:00:00','Immortals','Cloud9','Cloud9',4,11,61600,64900,'00:36:00','Blaber',11.5);
 /*!40000 ALTER TABLE `match` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/  /*!50003 TRIGGER `player_recalc_mvp_trigger` AFTER INSERT ON `match` FOR EACH ROW BEGIN 
+	UPDATE player SET mvp_count = mvp_count + 1 WHERE ign = NEW.mvp;
+	END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `pick_ban`
@@ -87,7 +102,7 @@ DROP TABLE IF EXISTS `pick_ban`;
 CREATE TABLE `pick_ban` (
   `match_id` tinyint NOT NULL,
   `team_name` varchar(64) NOT NULL,
-  `pick_or_ban` varchar(4) NOT NULL,
+  `pick_or_ban` varchar(64) NOT NULL,
   `champion1` varchar(64) DEFAULT NULL,
   `champion2` varchar(64) DEFAULT NULL,
   `champion3` varchar(64) DEFAULT NULL,
@@ -116,23 +131,18 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `champ_add_trigger` BEFORE INSERT ON `pick_ban` FOR EACH ROW BEGIN
-	IF (SELECT COUNT(*) FROM champion WHERE name = NEW.champion1) = 0 THEN
-		INSERT INTO `champion` VALUES (NEW.champion1, 0, 0, 0);
-	END IF;
-    IF (SELECT COUNT(*) FROM champion WHERE name = NEW.champion2) = 0 THEN
-		INSERT INTO `champion` VALUES (NEW.champion1, 0, 0, 0);
-	END IF;
-    IF (SELECT COUNT(*) FROM champion WHERE name = NEW.champion3) = 0 THEN
-		INSERT INTO `champion` VALUES (NEW.champion1, 0, 0, 0);
-	END IF;
-    IF (SELECT COUNT(*) FROM champion WHERE name = NEW.champion4) = 0 THEN
-		INSERT INTO `champion` VALUES (NEW.champion1, 0, 0, 0);
-	END IF;
-    IF (SELECT COUNT(*) FROM champion WHERE name = NEW.champion5) = 0 THEN
-		INSERT INTO `champion` VALUES (NEW.champion1, 0, 0, 0);
-	END IF;
-END */;;
+/*!50003 CREATE*/  /*!50003 TRIGGER `champ_add_trigger` BEFORE INSERT ON `pick_ban` FOR EACH ROW BEGIN
+	INSERT INTO champion SELECT NEW.champion1, 0, 0, 0 WHERE NOT EXISTS 
+		(SELECT 1 FROM champion WHERE name = NEW.champion1);
+	INSERT INTO champion SELECT NEW.champion2, 0, 0, 0 WHERE NOT EXISTS 
+		(SELECT 1 FROM champion WHERE name = NEW.champion2);
+	INSERT INTO champion SELECT NEW.champion3, 0, 0, 0 WHERE NOT EXISTS 
+		(SELECT 1 FROM champion WHERE name = NEW.champion3);
+	INSERT INTO champion SELECT NEW.champion4, 0, 0, 0 WHERE NOT EXISTS 
+		(SELECT 1 FROM champion WHERE name = NEW.champion4);
+	INSERT INTO champion SELECT NEW.champion5, 0, 0, 0 WHERE NOT EXISTS 
+		(SELECT 1 FROM champion WHERE name = NEW.champion5);
+	END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -213,10 +223,6 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `team2_kills`,
  1 AS `mvp`*/;
 SET character_set_client = @saved_cs_client;
-
---
--- Dumping events for database 'lcs2021'
---
 
 --
 -- Dumping routines for database 'lcs2021'
@@ -409,9 +415,9 @@ DELIMITER ;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `top5matches` AS select `match`.`match_date` AS `match_date`,`match`.`team1_name` AS `team1_name`,`match`.`team2_name` AS `team2_name`,`match`.`outcome` AS `outcome`,`match`.`team1_kills` AS `team1_kills`,`match`.`team2_kills` AS `team2_kills`,`match`.`mvp` AS `mvp` from `match` where (`match`.`outcome` is not null) order by `match`.`match_date` desc limit 5 */;
@@ -428,4 +434,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-22 18:14:42
+-- Dump completed on 2022-04-18 20:49:58
