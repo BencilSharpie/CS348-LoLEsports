@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import logging
-from .models import Match, Champion, Team, Player
+from .models import Match, Champion, Team, Player, PickBan
 from django.db.models import Q, Max
 from .forms import DateTimeForm, MatchForm
 from django.db import connection
@@ -88,6 +88,7 @@ def champion(request):
     return render(request, 'champ.html', {'champs': champs})
 
 def matchEdit(request, matchID):
+    print( 'called!' )
     match = Match.objects.filter(match_id=matchID)
     if request.method == 'POST':
         form = MatchForm(request.POST)
@@ -122,5 +123,22 @@ def matchEdit(request, matchID):
         else:
             return render(request, 'match_edit.html', {'form': form, 'match': match[0]})
     else:
-        form = MatchForm()
+        if ( match[0].outcome is None ):
+            form = MatchForm()
+        else:
+            t1bans = PickBan.objects.filter(match__match_id=matchID, team_name=match[0].team1_name, pick_or_ban='ban')
+            t2bans = PickBan.objects.filter(match__match_id=matchID, team_name=match[0].team2_name, pick_or_ban='ban')
+            t1picks = PickBan.objects.filter(match__match_id=matchID, team_name=match[0].team1_name, pick_or_ban='pick')
+            t2picks = PickBan.objects.filter(match__match_id=matchID, team_name=match[0].team2_name, pick_or_ban='pick')
+            form = MatchForm({'winner_field': match[0].outcome, 'team1_kills': match[0].team1_kills,
+                              'team2_kills': match[0].team2_kills, 'team1_gold': match[0].team1_gold, 'team2_gold': match[0].team2_gold,
+                              'match_time': match[0].match_length, 'match_mvp': match[0].mvp, 'match_patch': match[0].patch,
+                              'team1_ban1': t1bans[0].champion1, 'team1_ban2': t1bans[0].champion2, 'team1_ban3': t1bans[0].champion3,
+                              'team1_ban4': t1bans[0].champion4, 'team1_ban5': t1bans[0].champion5, 'team2_ban1': t2bans[0].champion1,
+                              'team2_ban2': t2bans[0].champion2, 'team2_ban3': t2bans[0].champion3, 'team2_ban4': t2bans[0].champion4,
+                              'team2_ban5': t2bans[0].champion5, 'team1_pick1': t1picks[0].champion1, 'team1_pick2': t1picks[0].champion2,
+                              'team1_pick3': t1picks[0].champion3, 'team1_pick4': t1picks[0].champion4, 'team1_pick5': t1picks[0].champion5,
+                              'team2_pick1': t2picks[0].champion1, 'team2_pick2': t2picks[0].champion2, 'team2_pick3': t2picks[0].champion3,
+                              'team2_pick4': t2picks[0].champion4, 'team2_pick5': t2picks[0].champion5})
+
         return render(request, 'match_edit.html', {'form': form, 'match': match[0]})

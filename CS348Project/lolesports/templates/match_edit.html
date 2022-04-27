@@ -29,9 +29,9 @@ h1 {text-align: center;}
   color: white;
 }
 #sub {
-   position:absolute;
-   margin-left:-50px;
-   left:50%;
+   position:sticky;
+   left:70%;
+   top:0;
    width:100px;
    bottom:200px;
 }
@@ -43,6 +43,7 @@ h1 {text-align: center;}
 
 <body>
 <h1>Edit Current Match</h1>
+<h3>Currently Editing: {{ match.team1_name }} vs. {{ match.team2_name }} on {{ match.match_date }}</h3>
 <table id="schedule">
     <form action="/match/edit/{{ match.match_id }}" method="post">
         {% csrf_token %}
