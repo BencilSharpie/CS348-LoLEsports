@@ -41,3 +41,6 @@ class MatchForm(forms.Form):
     team2_pick3 = forms.CharField()
     team2_pick4 = forms.CharField()
     team2_pick5 = forms.CharField()
+
+class DeleteConfirmForm(forms.Form):
+    match_id = forms.IntegerField()

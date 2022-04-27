@@ -2,7 +2,7 @@ from django.shortcuts import render
 import logging
 from .models import Match, Champion, Team, Player, PickBan
 from django.db.models import Q, Max
-from .forms import DateTimeForm, MatchForm
+from .forms import DateTimeForm, MatchForm, DeleteConfirmForm
 from django.db import connection
 
 from django.http import HttpResponse
@@ -88,7 +88,6 @@ def champion(request):
     return render(request, 'champ.html', {'champs': champs})
 
 def matchEdit(request, matchID):
-    print( 'called!' )
     match = Match.objects.filter(match_id=matchID)
     if request.method == 'POST':
         form = MatchForm(request.POST)
@@ -142,3 +141,30 @@ def matchEdit(request, matchID):
                               'team2_pick4': t2picks[0].champion4, 'team2_pick5': t2picks[0].champion5})
 
         return render(request, 'match_edit.html', {'form': form, 'match': match[0]})
+
+def deleteMatch(request, matchID):
+    match = Match.objects.filter(match_id=matchID)
+    if request.method == 'POST':
+        form = DeleteConfirmForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            data = form.cleaned_data
+            if data.get('match_id') != int(matchID):
+                messages.success(request, 'The entered match ID is incorrect, please try again!')
+            else:
+                cursor = connection.cursor()
+                args = [data.get('match_id'), 0]
+                cursor.callproc('deleteMatch', args)
+                cursor.execute('SELECT @_insertBlankMatch_1')
+                result = cursor.fetchall()
+                response = result[0][0]
+                cursor.close()
+                if response == -1:
+                    messages.success(request, 'Invalid match ID, this entry may have already been deleted!')
+                else:
+                    matchList = Match.objects.all().exclude(outcome__isnull=True)
+                    return render(request, 'match.html', {'matchList' : matchList})
+        return render(request, 'delete_match.html', {'form': form, 'match': match[0]})
+    else:
+        form = DeleteConfirmForm()
+        return render(request, 'delete_match.html', {'form': form, 'match': match[0]})
