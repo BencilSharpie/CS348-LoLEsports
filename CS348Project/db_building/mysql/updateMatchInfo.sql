@@ -46,17 +46,21 @@ BEGIN
 		DELETE FROM `pick_ban` WHERE match_id = m_id;
         SET team1 = (SELECT team1_name FROM `match` WHERE match_id = m_id);
         SET team2 = (SELECT team2_name FROM `match` WHERE match_id = m_id);
-		UPDATE `match`
-        SET outcome = winner, team1_kills = t1_kills, team2_kills = t2_kills,
-			team1_gold = t1_gold, team2_gold = t2_gold, match_length = match_time, 
-            mvp = match_mvp, patch = match_patch
-		WHERE match_id = m_id;
-        INSERT INTO `pick_ban` VALUES (m_id, team1, 'ban', t1_ban1, t1_ban2, t1_ban3, t1_ban4, t1_ban5);
-        INSERT INTO `pick_ban` VALUES (m_id, team2, 'ban', t2_ban1, t2_ban2, t2_ban3, t2_ban4, t2_ban5);
-		INSERT INTO `pick_ban` VALUES (m_id, team1, 'pick', t1_pick1, t1_pick2, t1_pick3, t1_pick4, t1_pick5);
-		INSERT INTO `pick_ban` VALUES (m_id, team2, 'pick', t2_pick1, t2_pick2, t2_pick3, t2_pick4, t2_pick5);
-        CALL updateChampWinrates();
-        SET response = 0;
+        IF (team1 <> winner AND team2 <> winner) THEN
+			SET response = -4;
+        ELSE
+			UPDATE `match`
+			SET outcome = winner, team1_kills = t1_kills, team2_kills = t2_kills,
+				team1_gold = t1_gold, team2_gold = t2_gold, match_length = match_time, 
+				mvp = match_mvp, patch = match_patch
+			WHERE match_id = m_id;
+			INSERT INTO `pick_ban` VALUES (m_id, team1, 'ban', t1_ban1, t1_ban2, t1_ban3, t1_ban4, t1_ban5);
+			INSERT INTO `pick_ban` VALUES (m_id, team2, 'ban', t2_ban1, t2_ban2, t2_ban3, t2_ban4, t2_ban5);
+			INSERT INTO `pick_ban` VALUES (m_id, team1, 'pick', t1_pick1, t1_pick2, t1_pick3, t1_pick4, t1_pick5);
+			INSERT INTO `pick_ban` VALUES (m_id, team2, 'pick', t2_pick1, t2_pick2, t2_pick3, t2_pick4, t2_pick5);
+			CALL refreshTables();
+			SET response = 0;
+		END IF;
     END IF;
 END //
 DELIMITER ;

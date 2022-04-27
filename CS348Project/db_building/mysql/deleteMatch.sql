@@ -8,7 +8,7 @@ CREATE PROCEDURE `deleteMatch` (
 BEGIN
     IF (SELECT COUNT(*) FROM `match` WHERE `match_id` = m_id) = 1 THEN
 		DELETE FROM `match` WHERE match_id = m_id;
-        CALL updateChampWinrates();
+        CALL refreshTables();
 		SET response = 0;
 	ELSE
 		SET response = -1;
