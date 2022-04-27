@@ -10,11 +10,15 @@ CREATE PROCEDURE `insertBlankMatch` (
 BEGIN
 	DECLARE new_id int default 0;
     SET new_id = (SELECT MAX(match_id) FROM `match`) + 1;
-    IF (SELECT COUNT(*) FROM `match` WHERE `match_date` = d) = 0 THEN
+    IF (SELECT COUNT(*) FROM `team` WHERE `team_name` = team1) = 0 THEN
+		SET response = -1;
+    ELSEIF (SELECT COUNT(*) FROM `team` WHERE `team_name` = team2) = 0 THEN
+		SET response = -2;
+    ELSEIF (SELECT COUNT(*) FROM `match` WHERE `match_date` = d) = 0 THEN
 		INSERT INTO `match` (match_id, match_date, team1_name, team2_name) VALUES (new_id, d, team1, team2);
         SET response = 0;
 	ELSE
-		SET response = -1;
+		SET response = -3;
     END IF;
 END //
 DELIMITER ;

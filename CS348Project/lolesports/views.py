@@ -3,6 +3,7 @@ import logging
 from .models import Match, Champion, Team, Player
 from django.db.models import Q, Max
 from .forms import DateTimeForm
+from django.db import connection
 
 from django.http import HttpResponse
 from django.contrib import messages
@@ -17,28 +18,42 @@ def home(request):
 
 def schedule(request):
     if request.method == 'POST':
+
         # create a form instance and populate it with data from the request:
         form = DateTimeForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
             data = form.cleaned_data
-            if Team.objects.filter(team_name =f"{data.get('team1_name')}").exists() and \
-                Team.objects.filter(team_name =f"{data.get('team2_name')}").exists():
-                dt = datetime.datetime.combine(data.get('date_field'), data.get('time_field'))
-                if Match.objects.filter(match_date = dt).exists():
-                    messages.success(request, 'Match time conflict!')
-                else:
-                    id = int(Match.objects.aggregate(maxVal = Max('match_id')).get('maxVal'))
-                    id += 1
-                    Match.objects.create(match_id = id, match_date = dt, team1_name = data.get('team1_name'),
-                                         team2_name = data.get('team2_name'))
-            else:
+            dt = datetime.datetime.combine(data.get('date_field'), data.get('time_field'))
+            cursor = connection.cursor()
+            args = [dt, data.get('team1_name'), data.get('team2_name'), 0]
+            cursor.callproc('insertBlankMatch', args)
+            cursor.execute('SELECT @_insertBlankMatch_3')
+            result = cursor.fetchall()
+            response = result[0][0]
+            cursor.close()
+            #if Team.objects.filter(team_name =f"{data.get('team1_name')}").exists() and \
+            #    Team.objects.filter(team_name =f"{data.get('team2_name')}").exists():
+            #    dt = datetime.datetime.combine(data.get('date_field'), data.get('time_field'))
+            #    if Match.objects.filter(match_date = dt).exists():
+            #        messages.success(request, 'Match time conflict!')
+            #    else:
+            #        id = int(Match.objects.aggregate(maxVal = Max('match_id')).get('maxVal'))
+            #        id += 1
+            #        Match.objects.create(match_id = id, match_date = dt, team1_name = data.get('team1_name'),
+            #                             team2_name = data.get('team2_name'))
+            #else:
+            #    messages.success(request, 'Invalid team name selection!')
+            if response == -1 or response == -2:
                 messages.success(request, 'Invalid team name selection!')
-            scheduleList = Match.objects.all().exclude(outcome__isnull=False)
+            elif response == -3:
+                messages.success(request, 'Match time conflict!')
+
+            schedule_list = Match.objects.all().exclude(outcome__isnull=False)
     else:
-        scheduleList = Match.objects.all().exclude(outcome__isnull=False)
+        schedule_list = Match.objects.all().exclude(outcome__isnull=False)
         form = DateTimeForm()
-    return render(request, 'schedule.html', {'form': form, 'scheduleList': scheduleList})
+    return render(request, 'schedule.html', {'form': form, 'scheduleList': schedule_list})
 
 
 def team(request):

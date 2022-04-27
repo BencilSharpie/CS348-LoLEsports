@@ -35,5 +35,6 @@ BEGIN
 				WHERE name = champ_name;
 		END IF;
     END LOOP ITR;
+	DELETE FROM `champion` WHERE pick_rate = 0 AND ban_rate = 0 AND win_rate = 0;
 END //
 DELIMITER ;

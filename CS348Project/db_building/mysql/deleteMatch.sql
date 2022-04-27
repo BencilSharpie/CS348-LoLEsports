@@ -2,12 +2,14 @@ DROP PROCEDURE IF EXISTS deleteMatch;
 USE 'lcs2021'
 DELIMITER //
 CREATE PROCEDURE `deleteMatch` (
-	IN d DATETIME, 
+	IN m_id tinyint, 
     OUT response int(11)
 )
 BEGIN
-    IF (SELECT COUNT(*) FROM `match` WHERE `match_date` = d) = 1 THEN
-		DELETE FROM `match` WHERE match_date = d;
+    IF (SELECT COUNT(*) FROM `match` WHERE `match_id` = m_id) = 1 THEN
+		DELETE FROM `match` WHERE match_id = m_id;
+        CALL updateChampWinrates();
+		SET response = 0;
 	ELSE
 		SET response = -1;
     END IF;
