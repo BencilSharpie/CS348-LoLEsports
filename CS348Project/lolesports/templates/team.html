@@ -15,7 +15,11 @@
     <a href="/team/{{ i.team_name }}">{{ i.team_name }}</a>
   </div>
 {% endfor %}
-
+  {% if messages %}
+  {% for message in messages %}
+  {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+  {% endfor %}
+  {% endif %}
 </body>
 {% endblock %}
 </html> 

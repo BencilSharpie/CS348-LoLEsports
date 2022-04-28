@@ -104,7 +104,7 @@ h2 {text-align: center;}
 <br><br>
 
 <span>
-  <table id ="roster">
+  <table id ="roster1">
     <tr>
       <td><b>Roster</b></td>
     </tr>
@@ -120,7 +120,7 @@ h2 {text-align: center;}
 </span>
 
 &nbsp;
-<table id="roster">
+<table id="roster2">
   <caption>Team Summary</caption>
   <tr>
     <td>Wins</td>
@@ -136,6 +136,11 @@ h2 {text-align: center;}
   </tr>
 </table>
 {% endfor %}
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+    {% endfor %}
+    {% endif %}
 </body>
 {% endblock %}
 </html>

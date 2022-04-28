@@ -18,7 +18,6 @@ def home(request):
 
 def schedule(request):
     if request.method == 'POST':
-
         # create a form instance and populate it with data from the request:
         form = DateTimeForm(request.POST)
         # check whether it's valid:
@@ -36,7 +35,6 @@ def schedule(request):
                 messages.success(request, 'Invalid team name selection!')
             elif response == -3:
                 messages.success(request, 'Match time conflict!')
-
         schedule_list = Match.objects.all().exclude(outcome__isnull=False)
     else:
         schedule_list = Match.objects.all().exclude(outcome__isnull=False)
@@ -59,17 +57,19 @@ def match(request):
     return render(request, 'match.html', {'matchList' : matchList})
 
 def playerName(request, playerName):
-    # playerName = {
-    #    "name": playerName
-    # }
     playerInfo = Player.objects.filter(ign=playerName)
+    if playerInfo.count() == 0:
+        messages.success(request, 'Invalid player name, this entry may have been deleted!')
+        matchList = Match.objects.all().exclude(outcome__isnull=True)
+        return render(request, 'match.html', {'matchList' : matchList})
     return render(request, 'player_page.html', {'playerInfo': playerInfo})
 
 def teamName(request, teamName):
-    #teamName = {
-    #    "name": teamName
-    #}
     teamInfo = Team.objects.filter(team_name=teamName)
+    if teamInfo.count() == 0:
+        messages.success(request, 'Invalid team name, this entry may have been deleted!')
+        matchList = Match.objects.all().exclude(outcome__isnull=True)
+        return render(request, 'match.html', {'matchList' : matchList})
     logging.basicConfig(level=logging.INFO) # Here
     logging.info(teamInfo)
     teamPlayers = Player.objects.filter(team=teamName)
@@ -89,6 +89,10 @@ def champion(request):
 
 def matchEdit(request, matchID):
     match = Match.objects.filter(match_id=matchID)
+    if match.count() == 0:
+        messages.success(request, 'Invalid match ID, this entry may have been deleted!')
+        matchList = Match.objects.all().exclude(outcome__isnull=True)
+        return render(request, 'match.html', {'matchList' : matchList})
     if request.method == 'POST':
         form = MatchForm(request.POST)
         if form.is_valid():
@@ -144,6 +148,10 @@ def matchEdit(request, matchID):
 
 def deleteMatch(request, matchID):
     match = Match.objects.filter(match_id=matchID)
+    if match.count() == 0:
+        messages.success(request, 'Invalid match ID, this entry may have been deleted!')
+        matchList = Match.objects.all().exclude(outcome__isnull=True)
+        return render(request, 'match.html', {'matchList' : matchList})
     if request.method == 'POST':
         form = DeleteConfirmForm(request.POST)
         # check whether it's valid:
@@ -171,6 +179,10 @@ def deleteMatch(request, matchID):
 
 def rescheduleMatch(request, matchID):
     match = Match.objects.filter(match_id=matchID)
+    if match.count() == 0:
+        messages.success(request, 'Invalid match ID, this entry may have been deleted!')
+        matchList = Match.objects.all().exclude(outcome__isnull=True)
+        return render(request, 'match.html', {'matchList' : matchList})
     if match[0].outcome is not None:
         messages.success(request, 'Completed matches cannot be rescheduled!')
         schedule_list = Match.objects.all().exclude(outcome__isnull=False)

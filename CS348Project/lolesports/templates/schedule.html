@@ -72,6 +72,10 @@ h1 {text-align: center;}
             {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
         {% endfor %}
     {% endif %}
-  
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+    {% endfor %}
+    {% endif %}
 </table>
 {% endblock %}

@@ -57,6 +57,11 @@ h2 {text-align: center;}
 
     <h2>Last 5 Matches</h2>
 </table>
+{% if messages %}
+{% for message in messages %}
+{% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+{% endfor %}
+{% endif %}
 </body>
 {% endblock %}
 </html>
