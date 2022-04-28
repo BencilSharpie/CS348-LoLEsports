@@ -316,7 +316,8 @@ CREATE TABLE `match` (
   `match_length` varchar(64) DEFAULT NULL,
   `mvp` varchar(64) DEFAULT NULL,
   `patch` decimal(3,1) DEFAULT NULL,
-  PRIMARY KEY (`match_id`)
+  PRIMARY KEY (`match_id`),
+  KEY `OUTCOME_NULL` (`outcome`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -817,4 +818,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-28  0:01:37
+-- Dump completed on 2022-04-28 18:55:10
