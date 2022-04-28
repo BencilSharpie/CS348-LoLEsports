@@ -168,3 +168,44 @@ def deleteMatch(request, matchID):
     else:
         form = DeleteConfirmForm()
         return render(request, 'delete_match.html', {'form': form, 'match': match[0]})
+
+def rescheduleMatch(request, matchID):
+    match = Match.objects.filter(match_id=matchID)
+    if match[0].outcome is not None:
+        messages.success(request, 'Completed matches cannot be rescheduled!')
+        schedule_list = Match.objects.all().exclude(outcome__isnull=False)
+        form = DateTimeForm()
+        return render(request, 'schedule.html', {'form': form, 'scheduleList': schedule_list})
+    else:
+        if request.method == 'POST':
+            form = DateTimeForm(request.POST)
+            if form.is_valid():
+                data = form.cleaned_data
+                dt = datetime.datetime.combine(data.get('date_field'), data.get('time_field'))
+                cursor = connection.cursor()
+                args = [match[0].match_id, dt, data.get('team1_name'), data.get('team2_name'), 0]
+                cursor.callproc('rescheduleMatch', args)
+                cursor.execute('SELECT @_rescheduleMatch_4')
+                result = cursor.fetchall()
+                response = result[0][0]
+                cursor.close()
+                if response == -1:
+                    messages.success(request, 'Invalid match ID, this entry may have already been deleted!')
+                elif response == -2:
+                    messages.success(request, 'Completed matches cannot be rescheduled!')
+                elif response == -3 or response == -4:
+                    messages.success(request, 'Invalid team name selection!')
+                elif response == -5:
+                    messages.success(request, 'Match time conflict!')
+                else:
+                    form = DateTimeForm()
+                    schedule_list = Match.objects.all().exclude(outcome__isnull=False)
+                    return render(request, 'schedule.html', {'form': form, 'scheduleList': schedule_list})
+                return render(request, 'reschedule_match.html', {'form': form, 'match': match[0]})
+
+        else:
+            dt = match[0].match_date
+            print( dt )
+            form = DateTimeForm({'date_field': dt.date(), 'time_field': dt.time(), 'team1_name': match[0].team1_name,
+                 'team2_name': match[0].team2_name})
+            return render(request, 'reschedule_match.html', {'form': form, 'match': match[0]})

@@ -10,5 +10,6 @@ urlpatterns = [
     path('team/<teamName>', views.teamName, name='teamName'),
     path('player/<playerName>', views.playerName, name='playerName'),
     path('match/edit/<matchID>', views.matchEdit, name='matchID'),
-    path('delete/<matchID>', views.deleteMatch, name='matchID')
+    path('delete/<matchID>', views.deleteMatch, name='matchID'),
+    path('reschedule/<matchID>', views.rescheduleMatch, name='matchID')
 ]

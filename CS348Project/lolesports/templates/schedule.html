@@ -58,6 +58,7 @@ h1 {text-align: center;}
             <td><a href="/team/{{ match.team1_name }}">{{ match.team1_name }}</a></td> 
             <td><a href="/team/{{ match.team2_name }}">{{ match.team2_name }}</a></td>
             <td><a href="/match/edit/{{ match.match_id }}">Edit</a></td>
+            <td><a href="/reschedule/{{ match.match_id }}">Reschedule</a></td>
             <td><a href="/delete/{{ match.match_id }}">Delete</a></td>
         <tr>
     {% endfor %}
