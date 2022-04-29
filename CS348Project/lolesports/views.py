@@ -5,7 +5,7 @@ from django.db.models import Q, Max
 from .forms import DateTimeForm, MatchForm, DeleteConfirmForm
 from django.db import connection
 
-from .forms import TeamsForm
+from .forms import TeamsForm, PlayerForm
 
 from django.http import HttpResponse
 from django.contrib import messages
@@ -73,6 +73,47 @@ def customTeam(request):
     else:
         form = TeamsForm()
     return render(request, 'customTeam.html', {'teamList': teamList, 'form': form})
+
+def playerSearch(request):
+    countries = Player.objects.values('country').distinct().order_by('country')
+    roles = Player.objects.values('role').distinct().order_by('role')
+    playerList = Player.objects.all()
+    if request.method == 'POST':
+        form = PlayerForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            player_country = request.POST['player_country']
+            print(player_country)
+            if player_country != '0':
+                playerList = playerList.filter(country=player_country)
+            player_role = request.POST['player_role']
+            print(player_role)
+            if player_role != '0':
+                playerList = playerList.filter(role=player_role)
+            if data.get('min_salary') is not None:
+                playerList = playerList.filter(salary__gte=data.get('min_salary'))
+            if data.get('max_salary') is not None:
+                playerList = playerList.filter(salary__lte=data.get('max_salary'))
+            if data.get('min_KDA') is not None:
+                playerList = playerList.filter(kda_avg__gte=data.get('min_KDA'))
+            if data.get('max_KDA') is not None:
+                playerList = playerList.filter(kda_avg__lte=data.get('max_KDA'))
+            if data.get('min_CS_per_Min') is not None:
+                playerList = playerList.filter(cs_avg__gte=data.get('min_CS_per_Min'))
+            if data.get('max_CS_per_Min') is not None:
+                playerList = playerList.filter(cs_avg__lte=data.get('max_CS_per_Min'))
+            if data.get('min_mvp_count') is not None:
+                playerList = playerList.filter(mvp_count__gte=data.get('min_mvp_count'))
+            if data.get('max_mvp_count') is not None:
+                playerList = playerList.filter(mvp_count__lte=data.get('max_mvp_count'))
+        else:
+            print('err')
+        return render(request, 'player_search.html', {'playerList': playerList, 'countries': countries, 'roles': roles, 'form': form})
+    else:
+        form = PlayerForm()
+        playerList = Player.objects.none()
+        return render(request, 'player_search.html', {'playerList': playerList, 'countries': countries, 'roles': roles, 'form': form})
+
 
 def team(request):
     teamList = Team.objects.all()
@@ -253,3 +294,6 @@ def rescheduleMatch(request, matchID):
             form = DateTimeForm({'date_field': dt.date(), 'time_field': dt.time(), 'team1_name': match[0].team1_name,
                  'team2_name': match[0].team2_name})
             return render(request, 'reschedule_match.html', {'form': form, 'match': match[0]})
+
+def advancedSearch(request):
+    return render(request, 'advanced_search.html')

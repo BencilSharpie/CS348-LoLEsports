@@ -1,4 +1,5 @@
 from django import forms
+from .models import Match, Champion, Team, Player, PickBan
 
 class DatePickerInput(forms.DateInput):
     input_type = 'date'
@@ -47,6 +48,16 @@ class TeamsForm(forms.Form):
     max_salary = forms.IntegerField(required=False)
     min_KDA = forms.IntegerField(required=False)
     max_KDA = forms.IntegerField(required=False)
+
+class PlayerForm(forms.Form):
+    min_salary = forms.IntegerField(required=False)
+    max_salary = forms.IntegerField(required=False)
+    min_KDA = forms.DecimalField(required=False)
+    max_KDA = forms.DecimalField(required=False)
+    min_CS_per_Min = forms.DecimalField(required=False)
+    max_CS_per_Min = forms.DecimalField(required=False)
+    min_mvp_count = forms.IntegerField(required=False)
+    max_mvp_count = forms.IntegerField(required=False)
 
 class DeleteConfirmForm(forms.Form):
     match_id = forms.IntegerField()
