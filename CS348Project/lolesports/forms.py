@@ -49,7 +49,7 @@ class TeamsForm(forms.Form):
     min_KDA = forms.IntegerField(required=False)
     max_KDA = forms.IntegerField(required=False)
 
-class PlayerForm(forms.Form):
+class PlayerSearchForm(forms.Form):
     min_salary = forms.IntegerField(required=False)
     max_salary = forms.IntegerField(required=False)
     min_KDA = forms.DecimalField(required=False)
@@ -58,6 +58,14 @@ class PlayerForm(forms.Form):
     max_CS_per_Min = forms.DecimalField(required=False)
     min_mvp_count = forms.IntegerField(required=False)
     max_mvp_count = forms.IntegerField(required=False)
+
+class ChampSearchForm(forms.Form):
+    min_pick_rate = forms.DecimalField(required=False)
+    max_pick_rate = forms.DecimalField(required=False)
+    min_ban_rate = forms.DecimalField(required=False)
+    max_ban_rate = forms.DecimalField(required=False)
+    min_win_rate = forms.DecimalField(required=False)
+    max_win_rate = forms.DecimalField(required=False)
 
 class DeleteConfirmForm(forms.Form):
     match_id = forms.IntegerField()

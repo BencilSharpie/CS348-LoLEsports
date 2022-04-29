@@ -5,7 +5,7 @@ from django.db.models import Q, Max
 from .forms import DateTimeForm, MatchForm, DeleteConfirmForm
 from django.db import connection
 
-from .forms import TeamsForm, PlayerForm
+from .forms import TeamsForm, PlayerSearchForm, ChampSearchForm
 
 from django.http import HttpResponse
 from django.contrib import messages
@@ -79,15 +79,13 @@ def playerSearch(request):
     roles = Player.objects.values('role').distinct().order_by('role')
     playerList = Player.objects.all()
     if request.method == 'POST':
-        form = PlayerForm(request.POST)
+        form = PlayerSearchForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             player_country = request.POST['player_country']
-            print(player_country)
             if player_country != '0':
                 playerList = playerList.filter(country=player_country)
             player_role = request.POST['player_role']
-            print(player_role)
             if player_role != '0':
                 playerList = playerList.filter(role=player_role)
             if data.get('min_salary') is not None:
@@ -107,13 +105,38 @@ def playerSearch(request):
             if data.get('max_mvp_count') is not None:
                 playerList = playerList.filter(mvp_count__lte=data.get('max_mvp_count'))
         else:
-            print('err')
+            messages.success(request, 'Invalid form input!')
         return render(request, 'player_search.html', {'playerList': playerList, 'countries': countries, 'roles': roles, 'form': form})
     else:
-        form = PlayerForm()
+        form = PlayerSearchForm()
         playerList = Player.objects.none()
         return render(request, 'player_search.html', {'playerList': playerList, 'countries': countries, 'roles': roles, 'form': form})
 
+def champSearch(request):
+    if request.method == 'POST':
+        champList = Champion.objects.all()
+        form = ChampSearchForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            if data.get('min_pick_rate') is not None:
+                champList = champList.filter(pick_rate__gte=data.get('min_pick_rate'))
+            if data.get('max_pick_rate') is not None:
+                champList = champList.filter(pick_rate__lte=data.get('max_pick_rate'))
+            if data.get('min_ban_rate') is not None:
+                champList = champList.filter(ban_rate__gte=data.get('min_ban_rate'))
+            if data.get('max_ban_rate') is not None:
+                champList = champList.filter(ban_rate__lte=data.get('max_ban_rate'))
+            if data.get('min_win_rate') is not None:
+                champList = champList.filter(win_rate__gte=data.get('min_win_rate'))
+            if data.get('max_win_rate') is not None:
+                champList = champList.filter(win_rate__lte=data.get('max_win_rate'))
+        else:
+            messages.success(request, 'Invalid form input!')
+        return render(request, 'champ_search.html', {'champList': champList, 'form': form})
+    else:
+        form = ChampSearchForm()
+        champList = Champion.objects.none()
+        return render(request, 'champ_search.html', {'champList': champList, 'form': form})
 
 def team(request):
     teamList = Team.objects.all()
