@@ -42,5 +42,11 @@ class MatchForm(forms.Form):
     team2_pick4 = forms.CharField()
     team2_pick5 = forms.CharField()
 
+class TeamsForm(forms.Form):
+    min_salary = forms.IntegerField(required=False)
+    max_salary = forms.IntegerField(required=False)
+    min_KDA = forms.IntegerField(required=False)
+    max_KDA = forms.IntegerField(required=False)
+
 class DeleteConfirmForm(forms.Form):
     match_id = forms.IntegerField()

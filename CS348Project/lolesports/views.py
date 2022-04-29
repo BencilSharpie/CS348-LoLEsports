@@ -5,6 +5,8 @@ from django.db.models import Q, Max
 from .forms import DateTimeForm, MatchForm, DeleteConfirmForm
 from django.db import connection
 
+from .forms import TeamsForm
+
 from django.http import HttpResponse
 from django.contrib import messages
 import datetime
@@ -41,6 +43,36 @@ def schedule(request):
         form = DateTimeForm()
     return render(request, 'schedule.html', {'form': form, 'scheduleList': schedule_list})
 
+
+def customTeam(request):
+    teamList = Team.objects.all()
+    print("test1")
+    # if this is a POST request we need to process the form data
+    logging.debug("test")
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        logging.basicConfig(level=logging.INFO)
+        logging.info("test")
+        print("request is post")
+        form = TeamsForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            data = form.cleaned_data
+            context = {
+                "minKDA": data.get('min_KDA'),
+                "maxKDA": data.get('max_KDA'),
+                "minSalary": data.get('min_salary'),
+                "maxSalary": data.get('max_salary')
+            }
+            print("data is valid")
+            print(data.get('min_kda'))
+            # redirect to a new URL:
+            return render(request, 'customTeamResult.html', {"context": context})
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = TeamsForm()
+    return render(request, 'customTeam.html', {'teamList': teamList, 'form': form})
 
 def team(request):
     teamList = Team.objects.all()
