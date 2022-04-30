@@ -29,7 +29,7 @@ def schedule(request):
             dt = datetime.datetime.combine(data.get('date_field'), data.get('time_field'))
             cursor = connection.cursor()
             args = [dt, data.get('team1_name'), data.get('team2_name'), 0]
-            cursor.execute('SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED')
+            cursor.execute('SET TRANSACTION ISOLATION LEVEL READ COMMITTED')
             cursor.callproc('insertBlankMatch', args)
             cursor.execute('SELECT @_insertBlankMatch_3')
             result = cursor.fetchall()
@@ -259,7 +259,7 @@ def matchEdit(request, matchID):
                     data.get('team1_pick2'), data.get('team1_pick3'), data.get('team1_pick4'), data.get('team1_pick5'),
                     data.get('team2_pick1'), data.get('team2_pick2'), data.get('team2_pick3'), data.get('team2_pick4'),
                     data.get('team2_pick5'), 0]
-            cursor.execute('SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED')
+            cursor.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ')
             cursor.callproc('updateMatchInfo', args)
             cursor.execute('SELECT @_updateMatchInfo_29')
             result = cursor.fetchall()
@@ -315,7 +315,7 @@ def deleteMatch(request, matchID):
                 messages.success(request, 'The entered match ID is incorrect, please try again!')
             else:
                 cursor = connection.cursor()
-                cursor.execute('SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED')
+                cursor.execute('SET TRANSACTION ISOLATION LEVEL READ COMMITTED')
                 args = [data.get('match_id'), 0]
                 cursor.callproc('deleteMatch', args)
                 cursor.execute('SELECT @_insertBlankMatch_1')
@@ -351,7 +351,7 @@ def rescheduleMatch(request, matchID):
                 dt = datetime.datetime.combine(data.get('date_field'), data.get('time_field'))
                 cursor = connection.cursor()
                 args = [match[0].match_id, dt, data.get('team1_name'), data.get('team2_name'), 0]
-                cursor.execute('SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED')
+                cursor.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ')
                 cursor.callproc('rescheduleMatch', args)
                 cursor.execute('SELECT @_rescheduleMatch_4')
                 result = cursor.fetchall()
