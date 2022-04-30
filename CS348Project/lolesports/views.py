@@ -15,7 +15,7 @@ import datetime
 def home(request):
     top5Matches = Match.objects.exclude(outcome__isnull=True).values_list('team1_name', 'team2_name',
                                                                           'outcome', 'team1_kills', 'team2_kills',
-                                                                          'mvp').order_by('match_date')[:5]
+                                                                          'mvp').order_by('-match_date')[:5]
     return render(request, 'index.html', {'top5Matches': top5Matches})
 
 
