@@ -60,7 +60,7 @@ def matchSearch(request):
             for team in teams:
                 if team != '':
                     match_list = match_list.filter(Q(team1_name=team) | Q(team2_name=team))
-            if data.get('winner') is not '':
+            if data.get('winner') != '':
                 match_list = match_list.filter(outcome=data.get('winner'))
             if data.get('min_date_field') is not None:
                 dt = datetime.datetime.combine(data.get('min_date_field'), data.get('min_time_field'))
