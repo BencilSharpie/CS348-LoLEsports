@@ -34,6 +34,13 @@ h1 {text-align: center;}
    width:100px;
    bottom:200px;
 }
+#res {
+   position:sticky;
+   left:81%;
+   top:0;
+   width:100px;
+   bottom:200px;
+}
 #id_player_country {
     display: block;
     margin: 0 auto;
@@ -67,10 +74,13 @@ h1 {text-align: center;}
         </tr>
         {% endfor %}
     </div>
-    <form action="/champion_search" method="post" id = "form">
+    <form action="/champ_search" method="post" id = "form">
         {% csrf_token %}
         {{ form }}
         <input id = "sub" type="submit" value="Submit">
+    </form>
+    <form action="/champ_search" method="get" id = "reset">
+        <input id = "res" type="submit" value="Reset Form">
     </form>
     {% if messages %}
     {% for message in messages %}

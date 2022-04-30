@@ -1,4 +1,5 @@
 from django import forms
+# from django.core.validators import EMPTY_VALUES
 from .models import Match, Champion, Team, Player, PickBan
 
 class DatePickerInput(forms.DateInput):
@@ -19,7 +20,7 @@ class MatchForm(forms.Form):
     team2_kills = forms.IntegerField()
     team1_gold = forms.IntegerField()
     team2_gold = forms.IntegerField()
-    match_time = forms.RegexField(regex = "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]")
+    match_time = forms.RegexField(regex="[0-9][0-9]:[0-9][0-9]:[0-9][0-9]", help_text='ex. 00:12:04')
     match_mvp = forms.CharField()
     match_patch = forms.DecimalField()
     team1_ban1 = forms.CharField()
@@ -48,6 +49,47 @@ class TeamsForm(forms.Form):
     max_salary = forms.IntegerField(required=False)
     min_KDA = forms.IntegerField(required=False)
     max_KDA = forms.IntegerField(required=False)
+
+class MatchSearchForm(forms.Form):
+    teams = forms.CharField(required=False, help_text='Delimit with \",\" ex. team1,team2')
+    winner = forms.CharField(required=False)
+    min_date_field = forms.DateField(required=False, widget=DatePickerInput)
+    min_time_field = forms.TimeField(required=False, widget=TimePickerInput)
+    max_date_field = forms.DateField(required=False, widget=DatePickerInput)
+    max_time_field = forms.TimeField(required=False, widget=TimePickerInput)
+    min_kill_diff = forms.IntegerField(required=False)
+    max_kill_diff = forms.IntegerField(required=False)
+    min_gold_diff = forms.IntegerField(required=False)
+    max_gold_diff = forms.IntegerField(required=False)
+    min_match_time = forms.RegexField(regex="[0-9][0-9]:[0-9][0-9]:[0-9][0-9]", help_text='ex. 00:12:04', required=False)
+    max_match_time = forms.RegexField(regex="[0-9][0-9]:[0-9][0-9]:[0-9][0-9]", help_text='ex. 00:12:04', required=False)
+    mvp = forms.CharField(required=False)
+    patch = forms.DecimalField(required=False)
+    picked_champions = forms.CharField(required=False, help_text='Delimit with \",\" ex. champ1,champ2,champ3')
+    banned_champions = forms.CharField(required=False, help_text='Delimit with \",\" ex. champ1,champ2,champ3')
+    winning_champions = forms.CharField(required=False, help_text='Delimit with \",\" ex. champ1,champ2,champ3')
+    include_upcoming = forms.BooleanField(required=False)
+
+    def clean(self):
+        min_date_field = self.cleaned_data.get('min_date_field')
+        min_time_field = self.cleaned_data.get('min_time_field')
+        if min_date_field is not None or min_time_field is not None:
+            if min_date_field is None or min_time_field is None:
+                if min_date_field is None:
+                    self._errors['min_time_field'] = self.error_class(['Times must include a corresponding date!'])
+                else:
+                    self._errors['min_date_field'] = self.error_class(['If you search by date, you must include a time!'])
+        max_date_field = self.cleaned_data.get('max_date_field')
+        max_time_field = self.cleaned_data.get('max_time_field')
+        if max_date_field is not None or max_time_field is not None:
+            if max_date_field is None or max_time_field is None:
+                if max_date_field is None:
+                    self._errors['max_time_field'] = self.error_class(['Times must include a corresponding date!'])
+                else:
+                    self._errors['max_date_field'] = self.error_class(['If you search by date, you must include a time!'])
+        return self.cleaned_data
+
+
 
 class PlayerSearchForm(forms.Form):
     min_salary = forms.IntegerField(required=False)
