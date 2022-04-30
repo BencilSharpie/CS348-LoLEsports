@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+
+#schedule {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+h1 {text-align: center;}
+
+#schedule td, #schedule th {
+  border: 1px solid #ddd;
+  padding: 14px;
+}
+#schedule tr:nth-child(even){background-color: #f2f2f2;}
+#schedule tr:hover {background-color: #ddd;}
+#schedule th {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+#sub {
+   position:sticky;
+   left:70%;
+   top:0;
+   width:100px;
+   bottom:200px;
+}
+#res {
+   position:sticky;
+   left:81%;
+   top:0;
+   width:100px;
+   bottom:200px;
+}
+#id_player_country {
+    display: block;
+    margin: 0 auto;
+}
+#id_player_role {
+    display: block;
+    margin: 0 auto;
+}
+</style>
+</head>
+
+{% extends "./menubar.html" %}
+{% block content %}
+
+<body>
+<h1>Search For Champions</h1>
+<table id="schedule">
+    <div id="champs">
+        <tr>
+            <td>Champ</td>
+            <td>Pick Rate</td>
+            <td>Ban Rate</td>
+            <td>Win Rate</td>
+        </tr>
+        {% for champ in champList %}
+        <tr>
+            <td>{{ champ.name }}</td>
+            <td>{{ champ.pick_rate }}</td>
+            <td>{{ champ.ban_rate }}</td>
+            <td>{{ champ.win_rate }}</td>
+        </tr>
+        {% endfor %}
+    </div>
+    <form action="/champ_search" method="post" id = "form">
+        {% csrf_token %}
+        {{ form }}
+        <input id = "sub" type="submit" value="Submit">
+    </form>
+    <form action="/champ_search" method="get" id = "reset">
+        <input id = "res" type="submit" value="Reset Form">
+    </form>
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+    {% endfor %}
+    {% endif %}
+
+</table>
+{% endblock %}

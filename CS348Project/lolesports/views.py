@@ -4,6 +4,9 @@ from .models import Match, Champion, Team, Player, PickBan
 from django.db.models import Q, Max
 from .forms import DateTimeForm, MatchForm, DeleteConfirmForm
 from django.db import connection
+from django.db.models import Func, F
+
+from .forms import PlayerSearchForm, ChampSearchForm, MatchSearchForm
 
 from django.http import HttpResponse
 from django.contrib import messages
@@ -41,6 +44,155 @@ def schedule(request):
         form = DateTimeForm()
     return render(request, 'schedule.html', {'form': form, 'scheduleList': schedule_list})
 
+def matchSearch(request):
+    match_list = Match.objects.none()
+    if request.method == 'POST':
+        form = MatchSearchForm(request.POST)
+        if form.is_valid():
+            data = form.clean()
+            if data.get('include_upcoming'):
+                match_list = Match.objects.all()
+            else:
+                match_list = Match.objects.all().exclude(outcome__isnull=True)
+            match_list = match_list.annotate(killdiff=Func(F('team1_kills') - F('team2_kills'), function='ABS'))
+            match_list = match_list.annotate(golddiff=Func(F('team1_gold') - F('team2_gold'), function='ABS'))
+            teams = data.get('teams').split(',')
+            for team in teams:
+                if team != '':
+                    match_list = match_list.filter(Q(team1_name=team) | Q(team2_name=team))
+            if data.get('winner') is not '':
+                match_list = match_list.filter(outcome=data.get('winner'))
+            if data.get('min_date_field') is not None:
+                dt = datetime.datetime.combine(data.get('min_date_field'), data.get('min_time_field'))
+                match_list = match_list.filter(match_date__gte=dt)
+            if data.get('max_date_field') is not None:
+                dt = datetime.datetime.combine(data.get('max_date_field'), data.get('max_time_field'))
+                match_list = match_list.filter(match_date__lte=dt)
+            if data.get('min_kill_diff') is not None:
+                match_list = match_list.filter(killdiff__gte=data.get('min_kill_diff'))
+            if data.get('max_kill_diff') is not None:
+                match_list = match_list.filter(killdiff__lte=data.get('max_kill_diff'))
+            if data.get('min_gold_diff') is not None:
+                match_list = match_list.filter(golddiff__gte=data.get('min_gold_diff'))
+            if data.get('max_gold_diff') is not None:
+                match_list = match_list.filter(golddiff__lte=data.get('max_gold_diff'))
+            if data.get('min_match_time') != '':
+                match_list = match_list.filter(match_length__gte=data.get('min_match_time'))
+            if data.get('max_match_time') != '':
+                match_list = match_list.filter(match_length__lte=data.get('max_match_time'))
+            if data.get('mvp') != '':
+                match_list = match_list.filter(mvp=data.get('mvp'))
+            if data.get('patch') is not None:
+                match_list = match_list.filter(patch=data.get('patch'))
+            if data.get('picked_champions') != '' or data.get('banned_champions') != '' or data.get('winning_champions') != '':
+                match_ids = match_list.values_list('match_id', flat=True)
+                match_ids = list(match_ids)
+                pick_bans = PickBan.objects.all().filter(match_id__in=match_ids)
+                if data.get('picked_champions') != '':
+                    champs = data.get('picked_champions').split(',')
+                    pick_bans_picks = pick_bans.filter(pick_or_ban='pick')
+                    for champ in champs:
+                        if champ != '':
+                            pick_bans_picks = pick_bans_picks.filter(Q(champion1=champ) | Q(champion2=champ)
+                                                                     | Q(champion3=champ) | Q(champion4=champ)
+                                                                     | Q(champion5=champ))
+                    match_ids = pick_bans_picks.values_list('match_id', flat=True).distinct()
+                    match_ids = list(match_ids)
+                    match_list = Match.objects.all().filter(match_id__in=match_ids)
+                    pick_bans = PickBan.objects.all().filter(match_id__in=match_ids)
+                if data.get('banned_champions') != '':
+                    champs = data.get('banned_champions').split(',')
+                    pick_bans_bans = pick_bans.filter(pick_or_ban='ban')
+                    for champ in champs:
+                        if champ != '':
+                            pick_bans_bans = pick_bans_bans.filter(Q(champion1=champ) | Q(champion2=champ)
+                                                                     | Q(champion3=champ) | Q(champion4=champ)
+                                                                     | Q(champion5=champ))
+                    match_ids = pick_bans_bans.values_list('match_id', flat=True).distinct()
+                    match_ids = list(match_ids)
+                    match_list = Match.objects.all().filter(match_id__in=match_ids)
+                    pick_bans = PickBan.objects.all().filter(match_id__in=match_ids)
+                if data.get('winning_champions') != '':
+                    champs = data.get('winning_champions').split(',')
+                    winning_teams = match_list.values_list('outcome', flat=True)
+                    winning_teams = list(winning_teams)
+                    pick_bans_winners = pick_bans.filter(pick_or_ban='pick', team_name__in=winning_teams)
+                    for champ in champs:
+                        if champ != '':
+                            pick_bans_winners = pick_bans_winners.filter(Q(champion1=champ) | Q(champion2=champ)
+                                                                       | Q(champion3=champ) | Q(champion4=champ)
+                                                                       | Q(champion5=champ))
+                    match_ids = pick_bans_winners.values_list('match_id', flat=True).distinct()
+                    match_ids = list(match_ids)
+                    match_list = Match.objects.all().filter(match_id__in=match_ids)
+        return render(request, 'match_search.html', {'match_list': match_list, 'form': form})
+    else:
+        form = MatchSearchForm()
+        return render(request, 'match_search.html', {'match_list': match_list, 'form': form})
+
+def playerSearch(request):
+    countries = Player.objects.values('country').distinct().order_by('country')
+    roles = Player.objects.values('role').distinct().order_by('role')
+    playerList = Player.objects.all()
+    if request.method == 'POST':
+        form = PlayerSearchForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            player_country = request.POST['player_country']
+            if player_country != '0':
+                playerList = playerList.filter(country=player_country)
+            player_role = request.POST['player_role']
+            if player_role != '0':
+                playerList = playerList.filter(role=player_role)
+            if data.get('min_salary') is not None:
+                playerList = playerList.filter(salary__gte=data.get('min_salary'))
+            if data.get('max_salary') is not None:
+                playerList = playerList.filter(salary__lte=data.get('max_salary'))
+            if data.get('min_KDA') is not None:
+                playerList = playerList.filter(kda_avg__gte=data.get('min_KDA'))
+            if data.get('max_KDA') is not None:
+                playerList = playerList.filter(kda_avg__lte=data.get('max_KDA'))
+            if data.get('min_CS_per_Min') is not None:
+                playerList = playerList.filter(cs_avg__gte=data.get('min_CS_per_Min'))
+            if data.get('max_CS_per_Min') is not None:
+                playerList = playerList.filter(cs_avg__lte=data.get('max_CS_per_Min'))
+            if data.get('min_mvp_count') is not None:
+                playerList = playerList.filter(mvp_count__gte=data.get('min_mvp_count'))
+            if data.get('max_mvp_count') is not None:
+                playerList = playerList.filter(mvp_count__lte=data.get('max_mvp_count'))
+        else:
+            messages.success(request, 'Invalid form input!')
+        return render(request, 'player_search.html', {'playerList': playerList, 'countries': countries, 'roles': roles, 'form': form})
+    else:
+        form = PlayerSearchForm()
+        playerList = Player.objects.none()
+        return render(request, 'player_search.html', {'playerList': playerList, 'countries': countries, 'roles': roles, 'form': form})
+
+def champSearch(request):
+    if request.method == 'POST':
+        champList = Champion.objects.all()
+        form = ChampSearchForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            if data.get('min_pick_rate') is not None:
+                champList = champList.filter(pick_rate__gte=data.get('min_pick_rate'))
+            if data.get('max_pick_rate') is not None:
+                champList = champList.filter(pick_rate__lte=data.get('max_pick_rate'))
+            if data.get('min_ban_rate') is not None:
+                champList = champList.filter(ban_rate__gte=data.get('min_ban_rate'))
+            if data.get('max_ban_rate') is not None:
+                champList = champList.filter(ban_rate__lte=data.get('max_ban_rate'))
+            if data.get('min_win_rate') is not None:
+                champList = champList.filter(win_rate__gte=data.get('min_win_rate'))
+            if data.get('max_win_rate') is not None:
+                champList = champList.filter(win_rate__lte=data.get('max_win_rate'))
+        else:
+            messages.success(request, 'Invalid form input!')
+        return render(request, 'champ_search.html', {'champList': champList, 'form': form})
+    else:
+        form = ChampSearchForm()
+        champList = Champion.objects.none()
+        return render(request, 'champ_search.html', {'champList': champList, 'form': form})
 
 def team(request):
     teamList = Team.objects.all()
@@ -221,3 +373,6 @@ def rescheduleMatch(request, matchID):
             form = DateTimeForm({'date_field': dt.date(), 'time_field': dt.time(), 'team1_name': match[0].team1_name,
                  'team2_name': match[0].team2_name})
             return render(request, 'reschedule_match.html', {'form': form, 'match': match[0]})
+
+def advancedSearch(request):
+    return render(request, 'advanced_search.html')

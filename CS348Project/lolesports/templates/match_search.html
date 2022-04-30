@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+
+#schedule {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+h1 {text-align: center;}
+
+#schedule td, #schedule th {
+  border: 1px solid #ddd;
+  padding: 14px;
+}
+#schedule tr:nth-child(even){background-color: #f2f2f2;}
+#schedule tr:hover {background-color: #ddd;}
+#schedule th {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+#sub {
+   position:sticky;
+   left:70%;
+   top:0;
+   width:100px;
+   bottom:200px;
+}
+#res {
+   position:sticky;
+   left:81%;
+   top:0;
+   width:100px;
+   bottom:200px;
+}
+#id_player_country {
+    display: block;
+    margin: 0 auto;
+}
+#id_player_role {
+    display: block;
+    margin: 0 auto;
+}
+</style>
+</head>
+
+{% extends "./menubar.html" %}
+{% block content %}
+
+<body>
+<h1>Search For Champions</h1>
+<table id="schedule">
+    <div id="champs">
+        <tr>
+            <td><b>Date</b></td>
+            <td><b>Team 1</b></td>
+            <td><b>Team 2</b></td>
+            <td><b>Winner</b></td>
+            <td><b>MVP</b></td>
+            <td><b>Score</b></td>
+            <td><b>Team 1 Gold</b></td>
+            <td><b>Team 2 Gold</b></td>
+            <td><b>Match Length</b></td>
+            <td><b>Patch</b></td>
+        </tr>
+        {% for match in match_list %}
+        <tr>
+            <td> {{ match.match_date }} </td>
+            <td>
+                <a href="/team/{{ match.team1_name }}">{{ match.team1_name }}</a>
+            </td>
+            <td>
+                <a href="/team/{{ match.team2_name }}">{{ match.team2_name }}</a>
+            </td>
+            <td>{{ match.outcome }}</td>
+            <td>
+                {% if match.mvp %}
+                    <a href="/player/{{ match.mvp }}">{{ match.mvp }}</a>
+                {% else %}
+                    <a>{{ match.mvp }}</a>
+                {% endif %}
+            </td>
+            <td>{{ match.team1_kills }} - {{ match.team2_kills }}</td>
+            <td>{{ match.team1_gold }}</td>
+            <td>{{ match.team2_gold }}</td>
+            <td>{{ match.match_length }}</td>
+            <td>{{ match.patch }}</td>
+            <td><a href="/match/edit/{{ match.match_id }}">Edit</a></td>
+            <td><a href="/delete/{{ match.match_id }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </div>
+    <form action="/match_search" method="post" id = "form">
+        {% csrf_token %}
+        {{ form }}
+        <input id = "sub" type="submit" value="Submit">
+    </form>
+    <form action="/match_search" method="get" id = "reset">
+        <input id = "res" type="submit" value="Reset Form">
+    </form>
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+    {% endfor %}
+    {% endif %}
+
+</table>
+{% endblock %}
