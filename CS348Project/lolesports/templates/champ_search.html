@@ -59,12 +59,14 @@ h1 {text-align: center;}
 <h1>Search For Champions</h1>
 <table id="schedule">
     <div id="champs">
+        {% if champList.first is not None %}
         <tr>
             <td>Champ</td>
             <td>Pick Rate</td>
             <td>Ban Rate</td>
             <td>Win Rate</td>
         </tr>
+        {% endif %}
         {% for champ in champList %}
         <tr>
             <td>{{ champ.name }}</td>

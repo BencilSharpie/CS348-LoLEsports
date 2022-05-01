@@ -59,18 +59,20 @@ h1 {text-align: center;}
 <h1>Search For Matches</h1>
 <table id="schedule">
     <div id="champs">
-        <tr>
-            <td><b>Date</b></td>
-            <td><b>Team 1</b></td>
-            <td><b>Team 2</b></td>
-            <td><b>Winner</b></td>
-            <td><b>MVP</b></td>
-            <td><b>Score</b></td>
-            <td><b>Team 1 Gold</b></td>
-            <td><b>Team 2 Gold</b></td>
-            <td><b>Match Length</b></td>
-            <td><b>Patch</b></td>
-        </tr>
+        {% if match_list.first is not None %}
+            <tr>
+                <td><b>Date</b></td>
+                <td><b>Team 1</b></td>
+                <td><b>Team 2</b></td>
+                <td><b>Winner</b></td>
+                <td><b>MVP</b></td>
+                <td><b>Score</b></td>
+                <td><b>Team 1 Gold</b></td>
+                <td><b>Team 2 Gold</b></td>
+                <td><b>Match Length</b></td>
+                <td><b>Patch</b></td>
+            </tr>
+        {% endif %}
         {% for match in match_list %}
         <tr>
             <td> {{ match.match_date }} </td>

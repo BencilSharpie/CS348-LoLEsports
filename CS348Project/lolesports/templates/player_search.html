@@ -59,6 +59,7 @@ h1 {text-align: center;}
 <h1>Search For Players</h1>
 <table id="schedule">
     <div id="players">
+        {% if playerList.first is not None %}
         <tr>
             <td>Player</td>
             <td>Team</td>
@@ -69,6 +70,7 @@ h1 {text-align: center;}
             <td>Salary</td>
             <td>MVP Count</td>
         </tr>
+        {% endif %}
     {% for player in playerList %}
     <tr>
         <td><a href="/player/{{ player.ign }}">{{ player.ign }}</a></td>
