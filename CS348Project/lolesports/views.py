@@ -315,7 +315,7 @@ def deleteMatch(request, matchID):
                 messages.success(request, 'The entered match ID is incorrect, please try again!')
             else:
                 cursor = connection.cursor()
-                cursor.execute('SET TRANSACTION ISOLATION LEVEL READ COMMITTED')
+                cursor.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ')
                 args = [data.get('match_id'), 0]
                 cursor.callproc('deleteMatch', args)
                 cursor.execute('SELECT @_insertBlankMatch_1')
