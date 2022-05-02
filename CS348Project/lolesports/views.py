@@ -29,7 +29,7 @@ def schedule(request):
             dt = datetime.datetime.combine(data.get('date_field'), data.get('time_field'))
             cursor = connection.cursor()
             args = [dt, data.get('team1_name'), data.get('team2_name'), 0]
-            cursor.execute('SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED')
+            cursor.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ')
             cursor.callproc('insertBlankMatch', args)
             cursor.execute('SELECT @_insertBlankMatch_3')
             result = cursor.fetchall()
