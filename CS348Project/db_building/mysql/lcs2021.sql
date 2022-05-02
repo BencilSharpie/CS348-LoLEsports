@@ -373,7 +373,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `champ_add_trigger` BEFORE INSERT ON `pick_ban` FOR EACH ROW BEGIN
+/*!50003 CREATE*/ /*!50003 TRIGGER `champ_add_trigger` BEFORE INSERT ON `pick_ban` FOR EACH ROW BEGIN
 	INSERT INTO champion SELECT NEW.champion1, 0, 0, 0 WHERE NOT EXISTS 
 		(SELECT 1 FROM champion WHERE name = NEW.champion1);
 	INSERT INTO champion SELECT NEW.champion2, 0, 0, 0 WHERE NOT EXISTS 
@@ -482,7 +482,7 @@ SET character_set_client = @saved_cs_client;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteMatch`(
+CREATE PROCEDURE `deleteMatch`(
 	IN m_id tinyint, 
     OUT response int(11)
 )
@@ -510,7 +510,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertBlankMatch`(
+CREATE PROCEDURE `insertBlankMatch`(
 	IN d DATETIME, 
     IN team1 varchar(64), 
     IN team2 varchar(64), 
@@ -545,7 +545,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `refreshTables`()
+CREATE PROCEDURE `refreshTables`()
 BEGIN
 	CALL updateChampWinrates();
     CALL updateMVPCount();
@@ -566,7 +566,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `rescheduleMatch`(
+CREATE PROCEDURE `rescheduleMatch`(
 	IN m_id tinyint, 
     IN d datetime,
     IN team1 varchar(64),
@@ -606,7 +606,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateChampWinrates`()
+CREATE PROCEDURE `updateChampWinrates`()
 BEGIN
 	DECLARE noMoreRow int default 1;
     DECLARE champ_name varchar(64);
@@ -657,7 +657,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateMatchInfo`(
+CREATE PROCEDURE `updateMatchInfo`(
 	IN m_id tinyint, 
     IN winner varchar(64),
     IN t1_kills tinyint,
@@ -734,7 +734,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateMVPCount`()
+CREATE PROCEDURE `updateMVPCount`()
 BEGIN
 	DECLARE noMoreRow int default 1;
     DECLARE player_ign varchar(64);
@@ -767,7 +767,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateTeamWL`()
+CREATE PROCEDURE `updateTeamWL`()
 BEGIN
 	DECLARE noMoreRow int default 1;
     DECLARE t_name varchar(64);
@@ -805,7 +805,6 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb3 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `top5matches` AS select `match`.`match_date` AS `match_date`,`match`.`team1_name` AS `team1_name`,`match`.`team2_name` AS `team2_name`,`match`.`outcome` AS `outcome`,`match`.`team1_kills` AS `team1_kills`,`match`.`team2_kills` AS `team2_kills`,`match`.`mvp` AS `mvp` from `match` where (`match`.`outcome` is not null) order by `match`.`match_date` desc limit 5 */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
