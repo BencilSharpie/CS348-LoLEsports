@@ -13,5 +13,4 @@ handlers:
   # files defined.
   - url: /.*
     script: auto
-# entrypoint: gunicorn -b :5433 NG.wsgi
 # [END django_app]
